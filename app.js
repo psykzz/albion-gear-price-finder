@@ -225,7 +225,15 @@ async function findPrices() {
     const location = document.getElementById('location').value;
     
     if (!itemName) {
-        alert('Please enter an item name');
+        // Show error message in results section instead of alert
+        const resultsSection = document.getElementById('resultsSection');
+        const resultsContent = document.getElementById('resultsContent');
+        resultsSection.style.display = 'block';
+        resultsContent.innerHTML = `
+            <div class="error-message">
+                <strong>Error:</strong> Please enter an item name
+            </div>
+        `;
         return;
     }
     
