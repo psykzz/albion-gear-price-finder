@@ -1,0 +1,23 @@
+{
+  "name": "albion-gear-price-finder",
+  "version": "1.0.0",
+  "description": "Web-based tool to find the cheapest way to achieve a certain tier of gear in Albion Online",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server -p 8080 -o",
+    "dev": "npx http-server -p 8080 -o"
+  },
+  "keywords": [
+    "albion",
+    "albion-online",
+    "price-finder",
+    "gear",
+    "market",
+    "tool"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Albion Gear Price Finder - Demo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Albion Gear Price Finder</h1>
+            <p class="subtitle">Find the cheapest way to achieve your desired gear tier</p>
+        </header>
+
+        <main>
+            <section class="input-section">
+                <div class="form-group">
+                    <label for="itemCategory">Item Category:</label>
+                    <select id="itemCategory" class="form-control" disabled>
+                        <option value="helmet" selected>Helmets</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="itemSelectGroup">
+                    <label for="itemSelect">Item:</label>
+                    <select id="itemSelect" class="form-control" disabled>
+                        <option value="HEAD_LEATHER_SET1" selected>Leather Hood</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="desiredTier">Desired Effective Tier:</label>
+                    <select id="desiredTier" class="form-control" disabled>
+                        <option value="4.2" selected>4.2 (Tier 4.2 = 5.1 = 6.0)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Server/Location:</label>
+                    <select id="location" class="form-control" disabled>
+                        <option value="all" selected>All Locations</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-primary" disabled>Demo Mode - Showing Sample Results</button>
+            </section>
+
+            <section class="results-section">
+                <h2>Results</h2>
+                <div id="resultsContent">
+                    <!-- Cheapest Option -->
+                    <div class="result-card cheapest">
+                        <div class="result-header">
+                            <div class="result-title">Tier 6.0</div>
+                            <div class="result-price">12,500 🪙</div>
+                        </div>
+                        <div class="result-details">
+                            <div class="detail-item">
+                                <div class="detail-label">Item ID:</div>
+                                <div class="detail-value">T6_HEAD_LEATHER_SET1</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Location:</div>
+                                <div class="detail-value">Caerleon</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Buy Price:</div>
+                                <div class="detail-value">11,800 🪙</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Last Updated:</div>
+                                <div class="detail-value">Dec 14, 11:05 PM</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Second Option -->
+                    <div class="result-card">
+                        <div class="result-header">
+                            <div class="result-title">Tier 5.1</div>
+                            <div class="result-price">14,200 🪙</div>
+                        </div>
+                        <div class="result-details">
+                            <div class="detail-item">
+                                <div class="detail-label">Item ID:</div>
+                                <div class="detail-value">T5_HEAD_LEATHER_SET1@1</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Location:</div>
+                                <div class="detail-value">Martlock</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Buy Price:</div>
+                                <div class="detail-value">13,500 🪙</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Last Updated:</div>
+                                <div class="detail-value">Dec 14, 10:45 PM</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Most Expensive Option -->
+                    <div class="result-card">
+                        <div class="result-header">
+                            <div class="result-title">Tier 4.2</div>
+                            <div class="result-price">18,750 🪙</div>
+                        </div>
+                        <div class="result-details">
+                            <div class="detail-item">
+                                <div class="detail-label">Item ID:</div>
+                                <div class="detail-value">T4_HEAD_LEATHER_SET1@2</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Location:</div>
+                                <div class="detail-value">Bridgewatch</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Buy Price:</div>
+                                <div class="detail-value">17,900 🪙</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Last Updated:</div>
+                                <div class="detail-value">Dec 14, 10:30 PM</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Savings Info -->
+                    <div class="result-card" style="background: #e8f5e9; border-color: #4caf50;">
+                        <div class="result-header">
+                            <div class="result-title">💰 Potential Savings</div>
+                            <div class="result-price">6,250 🪙 (33.3%)</div>
+                        </div>
+                        <p style="margin-top: 10px; color: #555;">
+                            By choosing the cheapest equivalent tier instead of the most expensive option.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="info-section">
+                <h3>How it works</h3>
+                <p>In Albion Online, gear has an <strong>effective tier</strong> based on both its base tier (4-8) and enchantment level (0-4).</p>
+                <p>The effective tier formula is: <code>Base Tier + (Enchantment × 0.1)</code></p>
+                <p>For example:</p>
+                <ul>
+                    <li>A Tier 4.2 item (Tier 4 with enchantment 2) has the same power as Tier 5.1 or Tier 6.0</li>
+                    <li>This tool helps you find which equivalent option is cheapest on the market</li>
+                </ul>
+                <p style="margin-top: 20px;"><strong>Note:</strong> This is a demo page showing sample data. Open <a href="index.html" style="color: #667eea;">index.html</a> to use the live tool with real market data.</p>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

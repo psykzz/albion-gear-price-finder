@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Albion Gear Price Finder</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Albion Gear Price Finder</h1>
+            <p class="subtitle">Find the cheapest way to achieve your desired gear tier</p>
+        </header>
+
+        <main>
+            <section class="input-section">
+                <div class="form-group">
+                    <label for="itemCategory">Item Category:</label>
+                    <select id="itemCategory" class="form-control">
+                        <option value="">-- Select a Category --</option>
+                        <option value="helmet">Helmets</option>
+                        <option value="armor">Armor</option>
+                        <option value="boots">Boots</option>
+                        <option value="weapon-melee">Melee Weapons</option>
+                        <option value="weapon-ranged">Ranged Weapons</option>
+                        <option value="weapon-magic">Magic Weapons</option>
+                        <option value="offhand">Off-hand Items</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="itemSelectGroup" style="display: none;">
+                    <label for="itemSelect">Item:</label>
+                    <select id="itemSelect" class="form-control">
+                        <option value="">-- Select an Item --</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="desiredTier">Desired Effective Tier:</label>
+                    <select id="desiredTier" class="form-control">
+                        <option value="4.0">4.0 (Tier 4)</option>
+                        <option value="4.1">4.1 (Tier 4.1)</option>
+                        <option value="4.2">4.2 (Tier 4.2 = 5.1 = 6.0)</option>
+                        <option value="4.3">4.3 (Tier 4.3 = 5.2 = 6.1 = 7.0)</option>
+                        <option value="5.0">5.0 (Tier 5)</option>
+                        <option value="5.1">5.1 (Tier 5.1 = 4.2 = 6.0)</option>
+                        <option value="5.2">5.2 (Tier 5.2 = 4.3 = 6.1 = 7.0)</option>
+                        <option value="5.3">5.3 (Tier 5.3 = 6.2 = 7.1 = 8.0)</option>
+                        <option value="6.0">6.0 (Tier 6 = 4.2 = 5.1)</option>
+                        <option value="6.1">6.1 (Tier 6.1 = 4.3 = 5.2 = 7.0)</option>
+                        <option value="6.2">6.2 (Tier 6.2 = 5.3 = 7.1 = 8.0)</option>
+                        <option value="6.3">6.3 (Tier 6.3 = 7.2 = 8.1)</option>
+                        <option value="7.0">7.0 (Tier 7 = 4.3 = 5.2 = 6.1)</option>
+                        <option value="7.1">7.1 (Tier 7.1 = 5.3 = 6.2 = 8.0)</option>
+                        <option value="7.2">7.2 (Tier 7.2 = 6.3 = 8.1)</option>
+                        <option value="7.3">7.3 (Tier 7.3 = 8.2)</option>
+                        <option value="8.0">8.0 (Tier 8 = 5.3 = 6.2 = 7.1)</option>
+                        <option value="8.1">8.1 (Tier 8.1 = 6.3 = 7.2)</option>
+                        <option value="8.2">8.2 (Tier 8.2 = 7.3)</option>
+                        <option value="8.3">8.3 (Tier 8.3)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Server/Location:</label>
+                    <select id="location" class="form-control">
+                        <option value="all">All Locations</option>
+                        <option value="Caerleon">Caerleon</option>
+                        <option value="Martlock">Martlock</option>
+                        <option value="Bridgewatch">Bridgewatch</option>
+                        <option value="Lymhurst">Lymhurst</option>
+                        <option value="FortSterling">Fort Sterling</option>
+                        <option value="Thetford">Thetford</option>
+                    </select>
+                </div>
+
+                <button id="findPrices" class="btn btn-primary">Find Cheapest Option</button>
+            </section>
+
+            <section class="results-section" id="resultsSection" style="display: none;">
+                <h2>Results</h2>
+                <div id="loadingIndicator" class="loading" style="display: none;">
+                    <p>Loading prices...</p>
+                </div>
+                <div id="resultsContent"></div>
+            </section>
+
+            <section class="info-section">
+                <h3>How it works</h3>
+                <p>In Albion Online, gear has an <strong>effective tier</strong> based on both its base tier (4-8) and enchantment level (0-4).</p>
+                <p>The effective tier formula is: <code>Base Tier + (Enchantment × 0.1)</code></p>
+                <p>For example:</p>
+                <ul>
+                    <li>A Tier 4.2 item (Tier 4 with enchantment 2) has the same power as Tier 5.1 or Tier 6.0</li>
+                    <li>This tool helps you find which equivalent option is cheapest on the market</li>
+                </ul>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
