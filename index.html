@@ -16,9 +16,24 @@
         <main>
             <section class="input-section">
                 <div class="form-group">
-                    <label for="itemName">Item Name:</label>
-                    <input type="text" id="itemName" placeholder="e.g., T4_HEAD_LEATHER_SET1" class="form-control">
-                    <small class="help-text">Enter the base item ID (without enchantment)</small>
+                    <label for="itemCategory">Item Category:</label>
+                    <select id="itemCategory" class="form-control">
+                        <option value="">-- Select a Category --</option>
+                        <option value="helmet">Helmets</option>
+                        <option value="armor">Armor</option>
+                        <option value="boots">Boots</option>
+                        <option value="weapon-melee">Melee Weapons</option>
+                        <option value="weapon-ranged">Ranged Weapons</option>
+                        <option value="weapon-magic">Magic Weapons</option>
+                        <option value="offhand">Off-hand Items</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="itemSelectGroup" style="display: none;">
+                    <label for="itemSelect">Item:</label>
+                    <select id="itemSelect" class="form-control">
+                        <option value="">-- Select an Item --</option>
+                    </select>
                 </div>
 
                 <div class="form-group">

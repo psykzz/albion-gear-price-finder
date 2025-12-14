@@ -11,6 +11,8 @@ This tool uses market data from the [Albion Online Data Project](https://www.alb
 
 ## Features
 
+- **Human-Readable Item Selector**: Browse items by category with friendly names instead of complex item IDs
+- **Comprehensive Item Database**: Includes helmets, armor, boots, weapons (melee/ranged/magic), and off-hand items
 - **Tier Equivalency Calculator**: Automatically finds all equivalent gear tiers
 - **Real-time Market Data**: Fetches current prices from Albion Online Data Project API
 - **Multi-Location Support**: Compare prices across different cities
@@ -37,15 +39,15 @@ The application will open automatically in your browser at `http://localhost:808
 
 ## Usage Instructions
 
-1. **Enter Item Name**: Input the base item ID (e.g., `T4_HEAD_LEATHER_SET1`, `T4_2H_SWORD`)
-   - Don't include the tier prefix or enchantment suffix
-   - The tool will generate the correct IDs for all equivalent tiers
+1. **Select Item Category**: Choose from Helmets, Armor, Boots, Melee Weapons, Ranged Weapons, Magic Weapons, or Off-hand Items
 
-2. **Select Desired Tier**: Choose the effective tier you want to achieve (e.g., 4.2, 5.1, 6.0)
+2. **Select Item**: Pick the specific item you want to find prices for (e.g., Leather Hood, Broadsword, Fire Staff)
 
-3. **Choose Location**: Select a specific city or "All Locations" to compare across all markets
+3. **Select Desired Tier**: Choose the effective tier you want to achieve (e.g., 4.2, 5.1, 6.0)
 
-4. **Find Prices**: Click the button to fetch current market data and see results
+4. **Choose Location**: Select a specific city or "All Locations" to compare across all markets
+
+5. **Find Prices**: Click the button to fetch current market data and see results
 
 ## Understanding Tier Equivalency
 

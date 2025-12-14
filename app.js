@@ -4,6 +4,106 @@
 const API_BASE_URL = 'https://west.albion-online-data.com/api/v2/stats/prices';
 const FALLBACK_API_URL = 'https://east.albion-online-data.com/api/v2/stats/prices';
 
+// Item database organized by category
+const ITEM_DATABASE = {
+    helmet: [
+        { name: 'Leather Hood', id: 'HEAD_LEATHER_SET1' },
+        { name: 'Mercenary Hood', id: 'HEAD_LEATHER_SET2' },
+        { name: 'Hunter Hood', id: 'HEAD_LEATHER_SET3' },
+        { name: 'Soldier Helmet', id: 'HEAD_PLATE_SET1' },
+        { name: 'Knight Helmet', id: 'HEAD_PLATE_SET2' },
+        { name: 'Guardian Helmet', id: 'HEAD_PLATE_SET3' },
+        { name: 'Cloth Cowl', id: 'HEAD_CLOTH_SET1' },
+        { name: 'Cleric Cowl', id: 'HEAD_CLOTH_SET2' },
+        { name: 'Mage Cowl', id: 'HEAD_CLOTH_SET3' }
+    ],
+    armor: [
+        { name: 'Leather Jacket', id: 'ARMOR_LEATHER_SET1' },
+        { name: 'Mercenary Jacket', id: 'ARMOR_LEATHER_SET2' },
+        { name: 'Hunter Jacket', id: 'ARMOR_LEATHER_SET3' },
+        { name: 'Soldier Armor', id: 'ARMOR_PLATE_SET1' },
+        { name: 'Knight Armor', id: 'ARMOR_PLATE_SET2' },
+        { name: 'Guardian Armor', id: 'ARMOR_PLATE_SET3' },
+        { name: 'Cloth Robe', id: 'ARMOR_CLOTH_SET1' },
+        { name: 'Cleric Robe', id: 'ARMOR_CLOTH_SET2' },
+        { name: 'Mage Robe', id: 'ARMOR_CLOTH_SET3' }
+    ],
+    boots: [
+        { name: 'Leather Shoes', id: 'SHOES_LEATHER_SET1' },
+        { name: 'Mercenary Shoes', id: 'SHOES_LEATHER_SET2' },
+        { name: 'Hunter Shoes', id: 'SHOES_LEATHER_SET3' },
+        { name: 'Soldier Boots', id: 'SHOES_PLATE_SET1' },
+        { name: 'Knight Boots', id: 'SHOES_PLATE_SET2' },
+        { name: 'Guardian Boots', id: 'SHOES_PLATE_SET3' },
+        { name: 'Cloth Sandals', id: 'SHOES_CLOTH_SET1' },
+        { name: 'Cleric Sandals', id: 'SHOES_CLOTH_SET2' },
+        { name: 'Mage Sandals', id: 'SHOES_CLOTH_SET3' }
+    ],
+    'weapon-melee': [
+        { name: 'Broadsword', id: 'MAIN_SWORD' },
+        { name: 'Claymore', id: 'MAIN_CLAYMORE' },
+        { name: 'Dual Swords', id: 'MAIN_DUALSWORD' },
+        { name: 'Quarterstaff', id: 'MAIN_QUARTERSTAFF' },
+        { name: 'Iron-clad Staff', id: 'MAIN_IRONCLADEDSTAFF' },
+        { name: 'Double Bladed Staff', id: 'MAIN_DOUBLEBLADEDSTAFF' },
+        { name: 'Mace', id: 'MAIN_MACE' },
+        { name: 'Heavy Mace', id: 'MAIN_HEAVYMACE' },
+        { name: 'Morning Star', id: 'MAIN_MORNINGSTAR' },
+        { name: 'Hammer', id: 'MAIN_HAMMER' },
+        { name: 'Polehammer', id: 'MAIN_POLEHAMMER' },
+        { name: 'Great Hammer', id: 'MAIN_GREATHAMMER' },
+        { name: 'Battleaxe', id: 'MAIN_AXE' },
+        { name: 'Greataxe', id: 'MAIN_GREATAXE' },
+        { name: 'Halberd', id: 'MAIN_HALBERD' },
+        { name: 'Spear', id: 'MAIN_SPEAR' },
+        { name: 'Pike', id: 'MAIN_PIKE' },
+        { name: 'Glaive', id: 'MAIN_GLAIVE' },
+        { name: 'Dagger', id: 'MAIN_DAGGER' },
+        { name: 'Dagger Pair', id: 'MAIN_DAGGERPAIR' },
+        { name: 'Claws', id: 'MAIN_CLAWPAIR' }
+    ],
+    'weapon-ranged': [
+        { name: 'Bow', id: 'MAIN_BOW' },
+        { name: 'Warbow', id: 'MAIN_WARBOW' },
+        { name: 'Longbow', id: 'MAIN_LONGBOW' },
+        { name: 'Crossbow', id: 'MAIN_CROSSBOW' },
+        { name: 'Heavy Crossbow', id: 'MAIN_CROSSBOWLARGE' },
+        { name: 'Light Crossbow', id: 'MAIN_CROSSBOW_CANNON' }
+    ],
+    'weapon-magic': [
+        { name: 'Fire Staff', id: 'MAIN_FIRESTAFF' },
+        { name: 'Great Fire Staff', id: 'MAIN_FIRESTAFF_CRYSTAL' },
+        { name: 'Infernal Staff', id: 'MAIN_INFERNOSTAFF' },
+        { name: 'Frost Staff', id: 'MAIN_FROSTSTAFF' },
+        { name: 'Glacial Staff', id: 'MAIN_ICEGAUNTLETS' },
+        { name: 'Hoarfrost Staff', id: 'MAIN_ICECRYSTAL' },
+        { name: 'Arcane Staff', id: 'MAIN_ARCANESTAFF' },
+        { name: 'Great Arcane Staff', id: 'MAIN_ARCANE_RINGPAIR' },
+        { name: 'Enigmatic Staff', id: 'MAIN_ENIGMATICSTAFF' },
+        { name: 'Holy Staff', id: 'MAIN_HOLYSTAFF' },
+        { name: 'Great Holy Staff', id: 'MAIN_HOLYSTAFF_CRYSTAL' },
+        { name: 'Divine Staff', id: 'MAIN_DIVINESTAFF' },
+        { name: 'Nature Staff', id: 'MAIN_NATURESTAFF' },
+        { name: 'Great Nature Staff', id: 'MAIN_NATURESTAFF_KEEPER' },
+        { name: 'Wild Staff', id: 'MAIN_WILDSTAFF' },
+        { name: 'Cursed Staff', id: 'MAIN_CURSEDSTAFF' },
+        { name: 'Demonic Staff', id: 'MAIN_DEMONICSTAFF' },
+        { name: 'Great Cursed Staff', id: 'MAIN_CURSEDSTAFF_MORGANA' }
+    ],
+    offhand: [
+        { name: 'Shield', id: 'OFF_SHIELD' },
+        { name: 'Sarcophagus', id: 'OFF_SARCOPHAGUS' },
+        { name: 'Tome of Insight', id: 'OFF_TOWERSHIELD_UNDEAD' },
+        { name: 'Book', id: 'OFF_BOOK' },
+        { name: 'Tome of Spells', id: 'OFF_ORB' },
+        { name: 'Eye of Secrets', id: 'OFF_DEMONSKULL' },
+        { name: 'Taproot', id: 'OFF_TOTEM' },
+        { name: 'Mistcaller', id: 'OFF_HORN' },
+        { name: 'Facebreaker', id: 'OFF_TALISMAN' },
+        { name: 'Torch', id: 'OFF_TORCH' }
+    ]
+};
+
 // Tier equivalency mapping
 // Each effective tier maps to an array of [baseTier, enchantment] pairs
 const TIER_EQUIVALENTS = {
@@ -218,9 +318,33 @@ function displayResults(priceData, equivalents, baseItemId) {
     }
 }
 
+// Populate item select dropdown based on category
+function populateItemSelect(category) {
+    const itemSelect = document.getElementById('itemSelect');
+    const itemSelectGroup = document.getElementById('itemSelectGroup');
+    
+    if (!category) {
+        itemSelectGroup.style.display = 'none';
+        itemSelect.innerHTML = '<option value="">-- Select an Item --</option>';
+        return;
+    }
+    
+    const items = ITEM_DATABASE[category] || [];
+    itemSelect.innerHTML = '<option value="">-- Select an Item --</option>';
+    
+    items.forEach(item => {
+        const option = document.createElement('option');
+        option.value = item.id;
+        option.textContent = item.name;
+        itemSelect.appendChild(option);
+    });
+    
+    itemSelectGroup.style.display = 'block';
+}
+
 // Main function to find prices
 async function findPrices() {
-    const itemName = document.getElementById('itemName').value.trim();
+    const itemName = document.getElementById('itemSelect').value;
     const desiredTier = document.getElementById('desiredTier').value;
     const location = document.getElementById('location').value;
     
@@ -231,7 +355,7 @@ async function findPrices() {
         resultsSection.style.display = 'block';
         resultsContent.innerHTML = `
             <div class="error-message">
-                <strong>Error:</strong> Please enter an item name
+                <strong>Error:</strong> Please select a category and an item
             </div>
         `;
         return;
@@ -285,12 +409,13 @@ async function findPrices() {
 // Event listeners
 document.addEventListener('DOMContentLoaded', () => {
     const findButton = document.getElementById('findPrices');
-    findButton.addEventListener('click', findPrices);
+    const itemCategory = document.getElementById('itemCategory');
     
-    // Allow Enter key to trigger search
-    document.getElementById('itemName').addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            findPrices();
-        }
+    // Handle category selection
+    itemCategory.addEventListener('change', (e) => {
+        populateItemSelect(e.target.value);
     });
+    
+    // Handle find prices button
+    findButton.addEventListener('click', findPrices);
 });
