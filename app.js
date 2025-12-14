@@ -161,7 +161,7 @@ const ITEM_DATABASE = {
         { name: 'Nature Staff', id: 'MAIN_NATURESTAFF' },
         { name: 'Great Nature Staff', id: 'MAIN_NATURESTAFF_KEEPER' },
         { name: 'Wild Staff', id: 'MAIN_WILDSTAFF' },
-        { name: 'Druidic Staff', id: 'MAIN_NATURESTAFF_KEEPER' },
+        { name: 'Druidic Staff', id: 'MAIN_NATURESTAFF_AVALON' },
         { name: 'Blight Staff', id: 'MAIN_WILDSTAFF_HELL' },
         { name: 'Rampant Staff', id: 'MAIN_NATURESTAFF_HELL' }
     ],
