@@ -1,8 +1,8 @@
 // Albion Gear Price Finder - Main Application Logic
 
 // API Configuration
-const API_BASE_URL = 'https://west.albion-online-data.com/api/v2/stats/prices';
-const FALLBACK_API_URL = 'https://east.albion-online-data.com/api/v2/stats/prices';
+const API_BASE_URL = 'https://europe.albion-online-data.com/api/v2/stats/prices';
+const FALLBACK_API_URL = 'https://europe.albion-online-data.com/api/v2/stats/prices';
 
 // Item database organized by category
 const ITEM_DATABASE = {
