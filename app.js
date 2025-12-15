@@ -459,6 +459,34 @@ function populateItemSelect(category) {
     itemSelectGroup.style.display = 'block';
 }
 
+// Update URL with current selections
+function updateURLWithSelections() {
+    const itemCategory = document.getElementById('itemCategory').value;
+    const itemSelect = document.getElementById('itemSelect').value;
+    const desiredTier = document.getElementById('desiredTier').value;
+    const location = document.getElementById('location').value;
+    
+    const params = new URLSearchParams();
+    if (itemCategory) params.set('category', itemCategory);
+    if (itemSelect) params.set('item', itemSelect);
+    if (desiredTier) params.set('tier', desiredTier);
+    if (location) params.set('location', location);
+    
+    const newURL = `${window.location.pathname}?${params.toString()}`;
+    window.history.pushState({}, '', newURL);
+}
+
+// Load selections from URL parameters
+function loadFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    return {
+        category: params.get('category'),
+        item: params.get('item'),
+        tier: params.get('tier'),
+        location: params.get('location')
+    };
+}
+
 // Main function to find prices
 async function findPrices() {
     const itemName = document.getElementById('itemSelect').value;
@@ -477,6 +505,9 @@ async function findPrices() {
         `;
         return;
     }
+    
+    // Update URL with current selections for sharing
+    updateURLWithSelections();
     
     // Show loading state
     const resultsSection = document.getElementById('resultsSection');
@@ -523,7 +554,7 @@ async function findPrices() {
     }
 }
 
-// Restore saved selections from local storage
+// Restore saved selections from URL (priority) or local storage
 function restoreSavedSelections() {
     // Set flag to prevent saving during restoration
     isRestoring = true;
@@ -533,31 +564,34 @@ function restoreSavedSelections() {
     const desiredTier = document.getElementById('desiredTier');
     const location = document.getElementById('location');
     
-    // Restore location
-    const savedLocation = loadFromLocalStorage(STORAGE_KEYS.LOCATION);
-    if (savedLocation && location) {
-        location.value = savedLocation;
+    // Check URL parameters first (for sharing), fallback to localStorage
+    const urlParams = loadFromURL();
+    
+    // Restore location (URL takes priority)
+    const locationValue = urlParams.location || loadFromLocalStorage(STORAGE_KEYS.LOCATION);
+    if (locationValue && location) {
+        location.value = locationValue;
     }
     
-    // Restore desired tier
-    const savedTier = loadFromLocalStorage(STORAGE_KEYS.DESIRED_TIER);
-    if (savedTier && desiredTier) {
-        desiredTier.value = savedTier;
+    // Restore desired tier (URL takes priority)
+    const tierValue = urlParams.tier || loadFromLocalStorage(STORAGE_KEYS.DESIRED_TIER);
+    if (tierValue && desiredTier) {
+        desiredTier.value = tierValue;
     }
     
-    // Restore category first (this will populate the item select)
-    const savedCategory = loadFromLocalStorage(STORAGE_KEYS.ITEM_CATEGORY);
-    if (savedCategory && itemCategory) {
-        itemCategory.value = savedCategory;
-        populateItemSelect(savedCategory);
+    // Restore category first (URL takes priority, this will populate the item select)
+    const categoryValue = urlParams.category || loadFromLocalStorage(STORAGE_KEYS.ITEM_CATEGORY);
+    if (categoryValue && itemCategory) {
+        itemCategory.value = categoryValue;
+        populateItemSelect(categoryValue);
         
-        // After populating items, restore the selected item
-        const savedItem = loadFromLocalStorage(STORAGE_KEYS.ITEM_SELECT);
-        if (savedItem && itemSelect) {
+        // After populating items, restore the selected item (URL takes priority)
+        const itemValue = urlParams.item || loadFromLocalStorage(STORAGE_KEYS.ITEM_SELECT);
+        if (itemValue && itemSelect) {
             // Validate that the saved item exists in the options
-            const optionExists = itemSelect.querySelector(`option[value='${savedItem}']`) !== null;
+            const optionExists = itemSelect.querySelector(`option[value='${itemValue}']`) !== null;
             if (optionExists) {
-                itemSelect.value = savedItem;
+                itemSelect.value = itemValue;
             }
             // Note: invalid items will be cleared on next manual category change
         }
