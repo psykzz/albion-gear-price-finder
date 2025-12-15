@@ -555,7 +555,7 @@ function restoreSavedSelections() {
         const savedItem = loadFromLocalStorage(STORAGE_KEYS.ITEM_SELECT);
         if (savedItem && itemSelect) {
             // Validate that the saved item exists in the options
-            const optionExists = Array.from(itemSelect.options).some(option => option.value === savedItem);
+            const optionExists = itemSelect.querySelector(`option[value='${savedItem}']`) !== null;
             if (optionExists) {
                 itemSelect.value = savedItem;
             }
