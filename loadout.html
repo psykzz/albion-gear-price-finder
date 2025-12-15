@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Albion Gear Price Finder - Loadout View</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Albion Gear Price Finder</h1>
+            <p class="subtitle">Find the cheapest way to build your complete loadout</p>
+            <nav class="view-nav">
+                <a href="index.html" class="nav-link">Single Item View</a>
+                <span class="nav-link active">Loadout View</span>
+            </nav>
+        </header>
+
+        <main>
+            <section class="input-section">
+                <h2>Build Your Loadout</h2>
+                <p class="help-text">Select items for each slot and add them to your loadout</p>
+
+                <!-- Head Slot -->
+                <div class="loadout-slot">
+                    <h3>Head</h3>
+                    <div class="slot-controls">
+                        <div class="form-group">
+                            <label for="headCategory">Category:</label>
+                            <select id="headCategory" class="form-control slot-category">
+                                <option value="">-- Select Category --</option>
+                                <option value="helmet">Helmets</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="display: none;" data-slot-group="head">
+                            <label for="headItem">Item:</label>
+                            <select id="headItem" class="form-control slot-item">
+                                <option value="">-- Select Item --</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="headTier">Tier:</label>
+                            <select id="headTier" class="form-control slot-tier">
+                                <option value="4.0">4.0</option>
+                                <option value="4.1">4.1</option>
+                                <option value="4.2">4.2</option>
+                                <option value="4.3">4.3</option>
+                                <option value="5.0">5.0</option>
+                                <option value="5.1">5.1</option>
+                                <option value="5.2">5.2</option>
+                                <option value="5.3">5.3</option>
+                                <option value="6.0">6.0</option>
+                                <option value="6.1">6.1</option>
+                                <option value="6.2">6.2</option>
+                                <option value="6.3">6.3</option>
+                                <option value="7.0" selected>7.0</option>
+                                <option value="7.1">7.1</option>
+                                <option value="7.2">7.2</option>
+                                <option value="7.3">7.3</option>
+                                <option value="8.0">8.0</option>
+                                <option value="8.1">8.1</option>
+                                <option value="8.2">8.2</option>
+                                <option value="8.3">8.3</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-secondary btn-add" data-slot="head">Add to Loadout</button>
+                    </div>
+                    <div class="selected-item" id="headSelected" style="display: none;"></div>
+                </div>
+
+                <!-- Chest Slot -->
+                <div class="loadout-slot">
+                    <h3>Chest</h3>
+                    <div class="slot-controls">
+                        <div class="form-group">
+                            <label for="chestCategory">Category:</label>
+                            <select id="chestCategory" class="form-control slot-category">
+                                <option value="">-- Select Category --</option>
+                                <option value="armor">Armor</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="display: none;" data-slot-group="chest">
+                            <label for="chestItem">Item:</label>
+                            <select id="chestItem" class="form-control slot-item">
+                                <option value="">-- Select Item --</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="chestTier">Tier:</label>
+                            <select id="chestTier" class="form-control slot-tier">
+                                <option value="4.0">4.0</option>
+                                <option value="4.1">4.1</option>
+                                <option value="4.2">4.2</option>
+                                <option value="4.3">4.3</option>
+                                <option value="5.0">5.0</option>
+                                <option value="5.1">5.1</option>
+                                <option value="5.2">5.2</option>
+                                <option value="5.3">5.3</option>
+                                <option value="6.0">6.0</option>
+                                <option value="6.1">6.1</option>
+                                <option value="6.2">6.2</option>
+                                <option value="6.3">6.3</option>
+                                <option value="7.0" selected>7.0</option>
+                                <option value="7.1">7.1</option>
+                                <option value="7.2">7.2</option>
+                                <option value="7.3">7.3</option>
+                                <option value="8.0">8.0</option>
+                                <option value="8.1">8.1</option>
+                                <option value="8.2">8.2</option>
+                                <option value="8.3">8.3</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-secondary btn-add" data-slot="chest">Add to Loadout</button>
+                    </div>
+                    <div class="selected-item" id="chestSelected" style="display: none;"></div>
+                </div>
+
+                <!-- Feet Slot -->
+                <div class="loadout-slot">
+                    <h3>Feet</h3>
+                    <div class="slot-controls">
+                        <div class="form-group">
+                            <label for="feetCategory">Category:</label>
+                            <select id="feetCategory" class="form-control slot-category">
+                                <option value="">-- Select Category --</option>
+                                <option value="boots">Boots</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="display: none;" data-slot-group="feet">
+                            <label for="feetItem">Item:</label>
+                            <select id="feetItem" class="form-control slot-item">
+                                <option value="">-- Select Item --</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="feetTier">Tier:</label>
+                            <select id="feetTier" class="form-control slot-tier">
+                                <option value="4.0">4.0</option>
+                                <option value="4.1">4.1</option>
+                                <option value="4.2">4.2</option>
+                                <option value="4.3">4.3</option>
+                                <option value="5.0">5.0</option>
+                                <option value="5.1">5.1</option>
+                                <option value="5.2">5.2</option>
+                                <option value="5.3">5.3</option>
+                                <option value="6.0">6.0</option>
+                                <option value="6.1">6.1</option>
+                                <option value="6.2">6.2</option>
+                                <option value="6.3">6.3</option>
+                                <option value="7.0" selected>7.0</option>
+                                <option value="7.1">7.1</option>
+                                <option value="7.2">7.2</option>
+                                <option value="7.3">7.3</option>
+                                <option value="8.0">8.0</option>
+                                <option value="8.1">8.1</option>
+                                <option value="8.2">8.2</option>
+                                <option value="8.3">8.3</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-secondary btn-add" data-slot="feet">Add to Loadout</button>
+                    </div>
+                    <div class="selected-item" id="feetSelected" style="display: none;"></div>
+                </div>
+
+                <!-- Weapon Slot -->
+                <div class="loadout-slot">
+                    <h3>Weapon</h3>
+                    <div class="slot-controls">
+                        <div class="form-group">
+                            <label for="weaponCategory">Category:</label>
+                            <select id="weaponCategory" class="form-control slot-category">
+                                <option value="">-- Select Category --</option>
+                                <optgroup label="Melee Weapons">
+                                    <option value="weapon-sword">Swords</option>
+                                    <option value="weapon-axe">Axes</option>
+                                    <option value="weapon-mace">Maces</option>
+                                    <option value="weapon-hammer">Hammers</option>
+                                    <option value="weapon-spear">Spears</option>
+                                    <option value="weapon-quarterstaff">Quarterstaffs</option>
+                                    <option value="weapon-dagger">Daggers</option>
+                                </optgroup>
+                                <optgroup label="Ranged Weapons">
+                                    <option value="weapon-bow">Bows</option>
+                                    <option value="weapon-crossbow">Crossbows</option>
+                                </optgroup>
+                                <optgroup label="Magic Weapons">
+                                    <option value="weapon-firestaff">Fire Staffs</option>
+                                    <option value="weapon-froststaff">Frost Staffs</option>
+                                    <option value="weapon-arcanestaff">Arcane Staffs</option>
+                                    <option value="weapon-holystaff">Holy Staffs</option>
+                                    <option value="weapon-naturestaff">Nature Staffs</option>
+                                    <option value="weapon-cursedstaff">Cursed Staffs</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="form-group" style="display: none;" data-slot-group="weapon">
+                            <label for="weaponItem">Item:</label>
+                            <select id="weaponItem" class="form-control slot-item">
+                                <option value="">-- Select Item --</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="weaponTier">Tier:</label>
+                            <select id="weaponTier" class="form-control slot-tier">
+                                <option value="4.0">4.0</option>
+                                <option value="4.1">4.1</option>
+                                <option value="4.2">4.2</option>
+                                <option value="4.3">4.3</option>
+                                <option value="5.0">5.0</option>
+                                <option value="5.1">5.1</option>
+                                <option value="5.2">5.2</option>
+                                <option value="5.3">5.3</option>
+                                <option value="6.0">6.0</option>
+                                <option value="6.1">6.1</option>
+                                <option value="6.2">6.2</option>
+                                <option value="6.3">6.3</option>
+                                <option value="7.0" selected>7.0</option>
+                                <option value="7.1">7.1</option>
+                                <option value="7.2">7.2</option>
+                                <option value="7.3">7.3</option>
+                                <option value="8.0">8.0</option>
+                                <option value="8.1">8.1</option>
+                                <option value="8.2">8.2</option>
+                                <option value="8.3">8.3</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-secondary btn-add" data-slot="weapon">Add to Loadout</button>
+                    </div>
+                    <div class="selected-item" id="weaponSelected" style="display: none;"></div>
+                </div>
+
+                <!-- Offhand Slot -->
+                <div class="loadout-slot">
+                    <h3>Offhand</h3>
+                    <div class="slot-controls">
+                        <div class="form-group">
+                            <label for="offhandCategory">Category:</label>
+                            <select id="offhandCategory" class="form-control slot-category">
+                                <option value="">-- Select Category --</option>
+                                <option value="offhand">Off-hand Items</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="display: none;" data-slot-group="offhand">
+                            <label for="offhandItem">Item:</label>
+                            <select id="offhandItem" class="form-control slot-item">
+                                <option value="">-- Select Item --</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="offhandTier">Tier:</label>
+                            <select id="offhandTier" class="form-control slot-tier">
+                                <option value="4.0">4.0</option>
+                                <option value="4.1">4.1</option>
+                                <option value="4.2">4.2</option>
+                                <option value="4.3">4.3</option>
+                                <option value="5.0">5.0</option>
+                                <option value="5.1">5.1</option>
+                                <option value="5.2">5.2</option>
+                                <option value="5.3">5.3</option>
+                                <option value="6.0">6.0</option>
+                                <option value="6.1">6.1</option>
+                                <option value="6.2">6.2</option>
+                                <option value="6.3">6.3</option>
+                                <option value="7.0" selected>7.0</option>
+                                <option value="7.1">7.1</option>
+                                <option value="7.2">7.2</option>
+                                <option value="7.3">7.3</option>
+                                <option value="8.0">8.0</option>
+                                <option value="8.1">8.1</option>
+                                <option value="8.2">8.2</option>
+                                <option value="8.3">8.3</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-secondary btn-add" data-slot="offhand">Add to Loadout</button>
+                    </div>
+                    <div class="selected-item" id="offhandSelected" style="display: none;"></div>
+                </div>
+
+                <!-- Location and Search -->
+                <div class="form-group" style="margin-top: 30px;">
+                    <label for="location">Server/Location:</label>
+                    <select id="location" class="form-control">
+                        <option value="all">All Locations</option>
+                        <option value="Caerleon">Caerleon</option>
+                        <option value="Martlock">Martlock</option>
+                        <option value="Bridgewatch">Bridgewatch</option>
+                        <option value="Lymhurst">Lymhurst</option>
+                        <option value="FortSterling">Fort Sterling</option>
+                        <option value="Thetford">Thetford</option>
+                    </select>
+                </div>
+
+                <button id="findLoadoutPrices" class="btn btn-primary">Find Cheapest Loadout Options</button>
+            </section>
+
+            <section class="results-section" id="resultsSection" style="display: none;">
+                <h2>Loadout Results</h2>
+                <div id="loadingIndicator" class="loading" style="display: none;">
+                    <p>Loading prices...</p>
+                </div>
+                <div id="resultsContent"></div>
+            </section>
+
+            <section class="info-section">
+                <h3>How it works</h3>
+                <p>The <strong>Loadout View</strong> allows you to search for multiple items at once to build a complete gear set.</p>
+                <p>Select items for each slot (Head, Chest, Feet, Weapon, Offhand), choose your desired tier, and add them to your loadout.</p>
+                <p>The tool will find the cheapest equivalent tier for each item and show you the total cost of your loadout.</p>
+            </section>
+        </main>
+    </div>
+
+    <script src="loadout.js"></script>
+</body>
+</html>
