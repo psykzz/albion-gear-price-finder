@@ -558,9 +558,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const desiredTier = document.getElementById('desiredTier');
     const location = document.getElementById('location');
     
-    // Restore saved selections
-    restoreSavedSelections();
-    
     // Handle category selection
     itemCategory.addEventListener('change', (e) => {
         const categoryValue = e.target.value;
@@ -568,6 +565,7 @@ document.addEventListener('DOMContentLoaded', () => {
         saveToLocalStorage(STORAGE_KEYS.ITEM_CATEGORY, categoryValue);
         // Clear item selection when category changes
         if (!categoryValue) {
+            itemSelect.value = '';
             saveToLocalStorage(STORAGE_KEYS.ITEM_SELECT, '');
         }
     });
@@ -589,4 +587,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Handle find prices button
     findButton.addEventListener('click', findPrices);
+    
+    // Restore saved selections after event listeners are set up
+    restoreSavedSelections();
 });
