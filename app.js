@@ -289,7 +289,7 @@ function formatDate(dateString) {
 }
 
 // Display results
-function displayResults(priceData, equivalents, baseItemId) {
+function displayResults(priceData, equivalents, baseItemId, desiredTier) {
     const resultsContent = document.getElementById('resultsContent');
     resultsContent.innerHTML = '';
     
@@ -389,24 +389,36 @@ function displayResults(priceData, equivalents, baseItemId) {
     
     // Show savings information
     if (itemResults.length > 1) {
-        const savings = itemResults[itemResults.length - 1].price - itemResults[0].price;
-        const savingsPercent = ((savings / itemResults[itemResults.length - 1].price) * 100).toFixed(1);
+        // Parse the desired tier to find which item matches the user's selection
+        // desiredTier format is like "7.0", "6.2", etc.
+        const [selectedBaseTier, selectedEnchantment] = desiredTier.split('.').map(Number);
         
-        const savingsInfo = document.createElement('div');
-        savingsInfo.className = 'result-card';
-        savingsInfo.style.background = '#e8f5e9';
-        savingsInfo.style.borderColor = '#4caf50';
-        savingsInfo.innerHTML = `
-            <div class="result-header">
-                <div class="result-title">💰 Potential Savings</div>
-                <div class="result-price">${formatPrice(savings)} 🪙 (${savingsPercent}%)</div>
-            </div>
-            <p style="margin-top: 10px; color: #555;">
-                By choosing the cheapest equivalent tier instead of the most expensive option.
-            </p>
-        `;
+        // Find the item that matches the user's selected tier
+        const selectedItem = itemResults.find(item => 
+            item.tier === selectedBaseTier && item.enchantment === selectedEnchantment
+        );
         
-        resultsContent.appendChild(savingsInfo);
+        // If we found the selected item and it's not the cheapest, show savings
+        if (selectedItem && selectedItem !== itemResults[0]) {
+            const savings = selectedItem.price - itemResults[0].price;
+            const savingsPercent = ((savings / selectedItem.price) * 100).toFixed(1);
+            
+            const savingsInfo = document.createElement('div');
+            savingsInfo.className = 'result-card';
+            savingsInfo.style.background = '#e8f5e9';
+            savingsInfo.style.borderColor = '#4caf50';
+            savingsInfo.innerHTML = `
+                <div class="result-header">
+                    <div class="result-title">💰 Potential Savings</div>
+                    <div class="result-price">${formatPrice(savings)} 🪙 (${savingsPercent}%)</div>
+                </div>
+                <p style="margin-top: 10px; color: #555;">
+                    By choosing the cheapest equivalent tier instead of the selected option.
+                </p>
+            `;
+            
+            resultsContent.appendChild(savingsInfo);
+        }
     }
 }
 
@@ -539,7 +551,7 @@ async function findPrices() {
         const priceData = await fetchPriceData(itemIds, location);
         
         // Display results
-        displayResults(priceData, equivalents, itemName);
+        displayResults(priceData, equivalents, itemName, desiredTier);
         
     } catch (error) {
         console.error('Error:', error);
