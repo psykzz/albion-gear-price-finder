@@ -554,7 +554,12 @@ function restoreSavedSelections() {
         // After populating items, restore the selected item
         const savedItem = loadFromLocalStorage(STORAGE_KEYS.ITEM_SELECT);
         if (savedItem && itemSelect) {
-            itemSelect.value = savedItem;
+            // Validate that the saved item exists in the options
+            const optionExists = Array.from(itemSelect.options).some(option => option.value === savedItem);
+            if (optionExists) {
+                itemSelect.value = savedItem;
+            }
+            // Note: invalid items will be cleared on next manual category change
         }
     }
     
@@ -575,9 +580,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const categoryValue = e.target.value;
         populateItemSelect(categoryValue);
         saveToLocalStorage(STORAGE_KEYS.ITEM_CATEGORY, categoryValue);
-        // Clear item selection when category changes (always, to prevent invalid state)
-        itemSelect.value = '';
-        saveToLocalStorage(STORAGE_KEYS.ITEM_SELECT, '');
+        // Clear item selection when category changes (skip during restoration)
+        if (!isRestoring) {
+            itemSelect.value = '';
+            saveToLocalStorage(STORAGE_KEYS.ITEM_SELECT, '');
+        }
     });
     
     // Handle item selection
