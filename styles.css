@@ -37,6 +37,33 @@ header h1 {
     opacity: 0.9;
 }
 
+.view-nav {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.nav-link {
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.3s;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.nav-link.active {
+    background: white;
+    color: #667eea;
+}
+
 main {
     padding: 30px;
 }
@@ -244,6 +271,51 @@ main {
     color: #666;
 }
 
+/* Loadout View Styles */
+.loadout-slot {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 2px solid #e0e0e0;
+}
+
+.loadout-slot h3 {
+    color: #667eea;
+    margin-bottom: 15px;
+    font-size: 1.3em;
+}
+
+.slot-controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    align-items: end;
+}
+
+.btn-secondary {
+    background: #667eea;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #5568d3;
+}
+
+.selected-item {
+    margin-top: 15px;
+}
+
+.btn-remove:hover {
+    background: #a91e1e !important;
+}
+
+.input-section h2 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.8em;
+}
+
 @media (max-width: 600px) {
     header h1 {
         font-size: 1.8em;
@@ -260,5 +332,14 @@ main {
     
     .result-price {
         margin-top: 10px;
+    }
+    
+    .slot-controls {
+        grid-template-columns: 1fr;
+    }
+    
+    .view-nav {
+        flex-direction: column;
+        gap: 10px;
     }
 }
