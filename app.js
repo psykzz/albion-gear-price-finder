@@ -410,8 +410,14 @@ function displayResults(priceData, equivalents, baseItemId) {
     }
 }
 
+// Flag to prevent saving during restoration
+let isRestoring = false;
+
 // Save selections to local storage
 function saveToLocalStorage(key, value) {
+    // Skip saving during restoration to avoid unnecessary writes
+    if (isRestoring) return;
+    
     try {
         localStorage.setItem(key, value);
     } catch (e) {
@@ -519,6 +525,9 @@ async function findPrices() {
 
 // Restore saved selections from local storage
 function restoreSavedSelections() {
+    // Set flag to prevent saving during restoration
+    isRestoring = true;
+    
     const itemCategory = document.getElementById('itemCategory');
     const itemSelect = document.getElementById('itemSelect');
     const desiredTier = document.getElementById('desiredTier');
@@ -548,6 +557,9 @@ function restoreSavedSelections() {
             itemSelect.value = savedItem;
         }
     }
+    
+    // Clear flag after restoration is complete
+    isRestoring = false;
 }
 
 // Event listeners
@@ -563,11 +575,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const categoryValue = e.target.value;
         populateItemSelect(categoryValue);
         saveToLocalStorage(STORAGE_KEYS.ITEM_CATEGORY, categoryValue);
-        // Clear item selection when category changes
-        if (!categoryValue) {
-            itemSelect.value = '';
-            saveToLocalStorage(STORAGE_KEYS.ITEM_SELECT, '');
-        }
+        // Clear item selection when category changes (always, to prevent invalid state)
+        itemSelect.value = '';
+        saveToLocalStorage(STORAGE_KEYS.ITEM_SELECT, '');
     });
     
     // Handle item selection
