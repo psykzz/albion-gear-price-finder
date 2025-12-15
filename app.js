@@ -4,6 +4,14 @@
 const API_BASE_URL = 'https://europe.albion-online-data.com/api/v2/stats/prices';
 const FALLBACK_API_URL = 'https://europe.albion-online-data.com/api/v2/stats/prices';
 
+// Local Storage Keys
+const STORAGE_KEYS = {
+    ITEM_CATEGORY: 'albion_gear_finder_item_category',
+    ITEM_SELECT: 'albion_gear_finder_item_select',
+    DESIRED_TIER: 'albion_gear_finder_desired_tier',
+    LOCATION: 'albion_gear_finder_location'
+};
+
 // Item database organized by category
 const ITEM_DATABASE = {
     helmet: [
@@ -402,6 +410,25 @@ function displayResults(priceData, equivalents, baseItemId) {
     }
 }
 
+// Save selections to local storage
+function saveToLocalStorage(key, value) {
+    try {
+        localStorage.setItem(key, value);
+    } catch (e) {
+        console.error('Error saving to localStorage:', e);
+    }
+}
+
+// Load selection from local storage
+function loadFromLocalStorage(key) {
+    try {
+        return localStorage.getItem(key);
+    } catch (e) {
+        console.error('Error loading from localStorage:', e);
+        return null;
+    }
+}
+
 // Populate item select dropdown based on category
 function populateItemSelect(category) {
     const itemSelect = document.getElementById('itemSelect');
@@ -490,14 +517,74 @@ async function findPrices() {
     }
 }
 
+// Restore saved selections from local storage
+function restoreSavedSelections() {
+    const itemCategory = document.getElementById('itemCategory');
+    const itemSelect = document.getElementById('itemSelect');
+    const desiredTier = document.getElementById('desiredTier');
+    const location = document.getElementById('location');
+    
+    // Restore location
+    const savedLocation = loadFromLocalStorage(STORAGE_KEYS.LOCATION);
+    if (savedLocation && location) {
+        location.value = savedLocation;
+    }
+    
+    // Restore desired tier
+    const savedTier = loadFromLocalStorage(STORAGE_KEYS.DESIRED_TIER);
+    if (savedTier && desiredTier) {
+        desiredTier.value = savedTier;
+    }
+    
+    // Restore category first (this will populate the item select)
+    const savedCategory = loadFromLocalStorage(STORAGE_KEYS.ITEM_CATEGORY);
+    if (savedCategory && itemCategory) {
+        itemCategory.value = savedCategory;
+        populateItemSelect(savedCategory);
+        
+        // After populating items, restore the selected item
+        const savedItem = loadFromLocalStorage(STORAGE_KEYS.ITEM_SELECT);
+        if (savedItem && itemSelect) {
+            itemSelect.value = savedItem;
+        }
+    }
+}
+
 // Event listeners
 document.addEventListener('DOMContentLoaded', () => {
     const findButton = document.getElementById('findPrices');
     const itemCategory = document.getElementById('itemCategory');
+    const itemSelect = document.getElementById('itemSelect');
+    const desiredTier = document.getElementById('desiredTier');
+    const location = document.getElementById('location');
+    
+    // Restore saved selections
+    restoreSavedSelections();
     
     // Handle category selection
     itemCategory.addEventListener('change', (e) => {
-        populateItemSelect(e.target.value);
+        const categoryValue = e.target.value;
+        populateItemSelect(categoryValue);
+        saveToLocalStorage(STORAGE_KEYS.ITEM_CATEGORY, categoryValue);
+        // Clear item selection when category changes
+        if (!categoryValue) {
+            saveToLocalStorage(STORAGE_KEYS.ITEM_SELECT, '');
+        }
+    });
+    
+    // Handle item selection
+    itemSelect.addEventListener('change', (e) => {
+        saveToLocalStorage(STORAGE_KEYS.ITEM_SELECT, e.target.value);
+    });
+    
+    // Handle desired tier selection
+    desiredTier.addEventListener('change', (e) => {
+        saveToLocalStorage(STORAGE_KEYS.DESIRED_TIER, e.target.value);
+    });
+    
+    // Handle location selection
+    location.addEventListener('change', (e) => {
+        saveToLocalStorage(STORAGE_KEYS.LOCATION, e.target.value);
     });
     
     // Handle find prices button
