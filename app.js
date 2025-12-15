@@ -39,56 +39,140 @@ const ITEM_DATABASE = {
         { name: 'Cleric Sandals', id: 'SHOES_CLOTH_SET2' },
         { name: 'Mage Sandals', id: 'SHOES_CLOTH_SET3' }
     ],
-    'weapon-melee': [
+    // Swords
+    'weapon-sword': [
         { name: 'Broadsword', id: 'MAIN_SWORD' },
         { name: 'Claymore', id: 'MAIN_CLAYMORE' },
         { name: 'Dual Swords', id: 'MAIN_DUALSWORD' },
-        { name: 'Quarterstaff', id: 'MAIN_QUARTERSTAFF' },
-        { name: 'Iron-clad Staff', id: 'MAIN_IRONCLADEDSTAFF' },
-        { name: 'Double Bladed Staff', id: 'MAIN_DOUBLEBLADEDSTAFF' },
-        { name: 'Mace', id: 'MAIN_MACE' },
-        { name: 'Heavy Mace', id: 'MAIN_HEAVYMACE' },
-        { name: 'Morning Star', id: 'MAIN_MORNINGSTAR' },
-        { name: 'Hammer', id: 'MAIN_HAMMER' },
-        { name: 'Polehammer', id: 'MAIN_POLEHAMMER' },
-        { name: 'Great Hammer', id: 'MAIN_GREATHAMMER' },
+        { name: 'Carving Sword', id: 'MAIN_SCIMITAR_MORGANA' },
+        { name: 'Galatine Pair', id: 'MAIN_DUALSWORD_UNDEAD' },
+        { name: 'Clarent Blade', id: 'MAIN_CLAYMORE_AVALON' }
+    ],
+    // Axes
+    'weapon-axe': [
         { name: 'Battleaxe', id: 'MAIN_AXE' },
         { name: 'Greataxe', id: 'MAIN_GREATAXE' },
         { name: 'Halberd', id: 'MAIN_HALBERD' },
-        { name: 'Spear', id: 'MAIN_SPEAR' },
-        { name: 'Pike', id: 'MAIN_PIKE' },
-        { name: 'Glaive', id: 'MAIN_GLAIVE' },
-        { name: 'Dagger', id: 'MAIN_DAGGER' },
-        { name: 'Dagger Pair', id: 'MAIN_DAGGERPAIR' },
-        { name: 'Claws', id: 'MAIN_CLAWPAIR' }
+        { name: 'Carrioncaller', id: 'MAIN_HALBERD_MORGANA' },
+        { name: 'Infernal Scythe', id: 'MAIN_SCYTHE_HELL' },
+        { name: 'Bear Paws', id: 'MAIN_AXE_KEEPER' }
     ],
-    'weapon-ranged': [
+    // Maces
+    'weapon-mace': [
+        { name: 'Mace', id: 'MAIN_MACE' },
+        { name: 'Heavy Mace', id: 'MAIN_HEAVYMACE' },
+        { name: 'Morning Star', id: 'MAIN_MORNINGSTAR' },
+        { name: 'Bedrock Mace', id: 'MAIN_MACE_KEEPER' },
+        { name: 'Incubus Mace', id: 'MAIN_MACE_HELL' },
+        { name: 'Camlann Mace', id: 'MAIN_MACE_AVALON' }
+    ],
+    // Hammers
+    'weapon-hammer': [
+        { name: 'Hammer', id: 'MAIN_HAMMER' },
+        { name: 'Polehammer', id: 'MAIN_POLEHAMMER' },
+        { name: 'Great Hammer', id: 'MAIN_GREATHAMMER' },
+        { name: 'Forge Hammers', id: 'MAIN_HAMMER_UNDEAD' },
+        { name: 'Grovekeeper', id: 'MAIN_HAMMER_KEEPER' },
+        { name: 'Hand of Justice', id: 'MAIN_HAMMER_AVALON' }
+    ],
+    // Crossbows
+    'weapon-crossbow': [
+        { name: 'Crossbow', id: 'MAIN_CROSSBOW' },
+        { name: 'Heavy Crossbow', id: 'MAIN_CROSSBOWLARGE' },
+        { name: 'Light Crossbow', id: 'MAIN_CROSSBOW_CANNON' },
+        { name: 'Weeping Repeater', id: 'MAIN_CROSSBOW_UNDEAD' },
+        { name: 'Siegebow', id: 'MAIN_CROSSBOWLARGE_MORGANA' },
+        { name: 'Boltcasters', id: 'MAIN_CROSSBOW_AVALON' }
+    ],
+    // Bows
+    'weapon-bow': [
         { name: 'Bow', id: 'MAIN_BOW' },
         { name: 'Warbow', id: 'MAIN_WARBOW' },
         { name: 'Longbow', id: 'MAIN_LONGBOW' },
-        { name: 'Crossbow', id: 'MAIN_CROSSBOW' },
-        { name: 'Heavy Crossbow', id: 'MAIN_CROSSBOWLARGE' },
-        { name: 'Light Crossbow', id: 'MAIN_CROSSBOW_CANNON' }
+        { name: 'Whispering Bow', id: 'MAIN_BOW_KEEPER' },
+        { name: 'Wailing Bow', id: 'MAIN_WARBOW_UNDEAD' },
+        { name: 'Bow of Badon', id: 'MAIN_LONGBOW_UNDEAD' }
     ],
-    'weapon-magic': [
+    // Spears
+    'weapon-spear': [
+        { name: 'Spear', id: 'MAIN_SPEAR' },
+        { name: 'Pike', id: 'MAIN_PIKE' },
+        { name: 'Glaive', id: 'MAIN_GLAIVE' },
+        { name: 'Trinity Spear', id: 'MAIN_SPEAR_KEEPER' },
+        { name: 'Spirithunter', id: 'MAIN_GLAIVE_HELL' },
+        { name: 'Daybreaker', id: 'MAIN_SPEAR_AVALON' }
+    ],
+    // Quarterstaffs
+    'weapon-quarterstaff': [
+        { name: 'Quarterstaff', id: 'MAIN_QUARTERSTAFF' },
+        { name: 'Iron-clad Staff', id: 'MAIN_IRONCLADEDSTAFF' },
+        { name: 'Double Bladed Staff', id: 'MAIN_DOUBLEBLADEDSTAFF' },
+        { name: 'Black Monk Stave', id: 'MAIN_QUARTERSTAFF_AVALON' },
+        { name: 'Soulscythe', id: 'MAIN_DOUBLEBLADEDSTAFF_HELL' },
+        { name: 'Staff of Balance', id: 'MAIN_IRONCLADEDSTAFF_HELL' }
+    ],
+    // Daggers
+    'weapon-dagger': [
+        { name: 'Dagger', id: 'MAIN_DAGGER' },
+        { name: 'Dagger Pair', id: 'MAIN_DAGGERPAIR' },
+        { name: 'Claws', id: 'MAIN_CLAWPAIR' },
+        { name: 'Bloodletter', id: 'MAIN_DAGGER_HELL' },
+        { name: 'Deathgivers', id: 'MAIN_DAGGERPAIR_UNDEAD' },
+        { name: 'Black Hands', id: 'MAIN_CLAWPAIR_MORGANA' }
+    ],
+    // Fire Staffs
+    'weapon-firestaff': [
         { name: 'Fire Staff', id: 'MAIN_FIRESTAFF' },
         { name: 'Great Fire Staff', id: 'MAIN_FIRESTAFF_CRYSTAL' },
         { name: 'Infernal Staff', id: 'MAIN_INFERNOSTAFF' },
+        { name: 'Wildfire Staff', id: 'MAIN_FIRESTAFF_KEEPER' },
+        { name: 'Brimstone Staff', id: 'MAIN_INFERNOSTAFF_MORGANA' },
+        { name: 'Blazing Staff', id: 'MAIN_FIRESTAFF_HELL' }
+    ],
+    // Frost Staffs
+    'weapon-froststaff': [
         { name: 'Frost Staff', id: 'MAIN_FROSTSTAFF' },
         { name: 'Glacial Staff', id: 'MAIN_ICEGAUNTLETS' },
         { name: 'Hoarfrost Staff', id: 'MAIN_ICECRYSTAL' },
+        { name: 'Chillhowl', id: 'MAIN_FROSTSTAFF_KEEPER' },
+        { name: 'Icicle Staff', id: 'MAIN_ICECRYSTAL_UNDEAD' },
+        { name: 'Permafrost Prism', id: 'MAIN_ICEGAUNTLETS_HELL' }
+    ],
+    // Arcane Staffs
+    'weapon-arcanestaff': [
         { name: 'Arcane Staff', id: 'MAIN_ARCANESTAFF' },
         { name: 'Great Arcane Staff', id: 'MAIN_ARCANE_RINGPAIR' },
         { name: 'Enigmatic Staff', id: 'MAIN_ENIGMATICSTAFF' },
+        { name: 'Witchwork Staff', id: 'MAIN_ARCANESTAFF_HELL' },
+        { name: 'Occult Staff', id: 'MAIN_ENIGMATICSTAFF_MORGANA' },
+        { name: 'Evensong', id: 'MAIN_ENIGMATICORB_MORGANA' }
+    ],
+    // Holy Staffs
+    'weapon-holystaff': [
         { name: 'Holy Staff', id: 'MAIN_HOLYSTAFF' },
         { name: 'Great Holy Staff', id: 'MAIN_HOLYSTAFF_CRYSTAL' },
         { name: 'Divine Staff', id: 'MAIN_DIVINESTAFF' },
+        { name: 'Redemption Staff', id: 'MAIN_HOLYSTAFF_MORGANA' },
+        { name: 'Hallowfall', id: 'MAIN_HOLYSTAFF_HELL' },
+        { name: 'Lifetouch Staff', id: 'MAIN_HOLYSTAFF_UNDEAD' }
+    ],
+    // Nature Staffs
+    'weapon-naturestaff': [
         { name: 'Nature Staff', id: 'MAIN_NATURESTAFF' },
         { name: 'Great Nature Staff', id: 'MAIN_NATURESTAFF_KEEPER' },
         { name: 'Wild Staff', id: 'MAIN_WILDSTAFF' },
+        { name: 'Druidic Staff', id: 'MAIN_NATURESTAFF_AVALON' },
+        { name: 'Blight Staff', id: 'MAIN_WILDSTAFF_HELL' },
+        { name: 'Rampant Staff', id: 'MAIN_NATURESTAFF_HELL' }
+    ],
+    // Cursed Staffs
+    'weapon-cursedstaff': [
         { name: 'Cursed Staff', id: 'MAIN_CURSEDSTAFF' },
         { name: 'Demonic Staff', id: 'MAIN_DEMONICSTAFF' },
-        { name: 'Great Cursed Staff', id: 'MAIN_CURSEDSTAFF_MORGANA' }
+        { name: 'Great Cursed Staff', id: 'MAIN_CURSEDSTAFF_MORGANA' },
+        { name: 'Cursed Skull', id: 'MAIN_CURSEDSTAFF_UNDEAD' },
+        { name: 'Damnation Staff', id: 'MAIN_DEMONICSTAFF_HELL' },
+        { name: 'Shadowcaller', id: 'MAIN_CURSEDSTAFF_AVALON' }
     ],
     offhand: [
         { name: 'Shield', id: 'OFF_SHIELD' },

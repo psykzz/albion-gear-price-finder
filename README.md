@@ -39,9 +39,14 @@ The application will open automatically in your browser at `http://localhost:808
 
 ## Usage Instructions
 
-1. **Select Item Category**: Choose from Helmets, Armor, Boots, Melee Weapons, Ranged Weapons, Magic Weapons, or Off-hand Items
+1. **Select Item Category**: Choose from organized weapon trees and armor categories:
+   - Armor: Helmets, Armor, Boots
+   - Melee Weapons: Swords, Axes, Maces, Hammers, Spears, Quarterstaffs, Daggers
+   - Ranged Weapons: Bows, Crossbows
+   - Magic Weapons: Fire Staffs, Frost Staffs, Arcane Staffs, Holy Staffs, Nature Staffs, Cursed Staffs
+   - Off-hand Items
 
-2. **Select Item**: Pick the specific item you want to find prices for (e.g., Leather Hood, Broadsword, Fire Staff)
+2. **Select Item**: Pick the specific item you want to find prices for, including artifact weapons (e.g., Leather Hood, Broadsword, Clarent Blade, Fire Staff, Blazing Staff)
 
 3. **Select Desired Tier**: Choose the effective tier you want to achieve (e.g., 4.2, 5.1, 6.0)
 

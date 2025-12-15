@@ -19,13 +19,35 @@
                     <label for="itemCategory">Item Category:</label>
                     <select id="itemCategory" class="form-control">
                         <option value="">-- Select a Category --</option>
-                        <option value="helmet">Helmets</option>
-                        <option value="armor">Armor</option>
-                        <option value="boots">Boots</option>
-                        <option value="weapon-melee">Melee Weapons</option>
-                        <option value="weapon-ranged">Ranged Weapons</option>
-                        <option value="weapon-magic">Magic Weapons</option>
-                        <option value="offhand">Off-hand Items</option>
+                        <optgroup label="Armor">
+                            <option value="helmet">Helmets</option>
+                            <option value="armor">Armor</option>
+                            <option value="boots">Boots</option>
+                        </optgroup>
+                        <optgroup label="Melee Weapons">
+                            <option value="weapon-sword">Swords</option>
+                            <option value="weapon-axe">Axes</option>
+                            <option value="weapon-mace">Maces</option>
+                            <option value="weapon-hammer">Hammers</option>
+                            <option value="weapon-spear">Spears</option>
+                            <option value="weapon-quarterstaff">Quarterstaffs</option>
+                            <option value="weapon-dagger">Daggers</option>
+                        </optgroup>
+                        <optgroup label="Ranged Weapons">
+                            <option value="weapon-bow">Bows</option>
+                            <option value="weapon-crossbow">Crossbows</option>
+                        </optgroup>
+                        <optgroup label="Magic Weapons">
+                            <option value="weapon-firestaff">Fire Staffs</option>
+                            <option value="weapon-froststaff">Frost Staffs</option>
+                            <option value="weapon-arcanestaff">Arcane Staffs</option>
+                            <option value="weapon-holystaff">Holy Staffs</option>
+                            <option value="weapon-naturestaff">Nature Staffs</option>
+                            <option value="weapon-cursedstaff">Cursed Staffs</option>
+                        </optgroup>
+                        <optgroup label="Off-hand">
+                            <option value="offhand">Off-hand Items</option>
+                        </optgroup>
                     </select>
                 </div>
 
