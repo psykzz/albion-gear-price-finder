@@ -9,7 +9,8 @@ const STORAGE_KEYS = {
     ITEM_CATEGORY: 'albion_gear_finder_item_category',
     ITEM_SELECT: 'albion_gear_finder_item_select',
     DESIRED_TIER: 'albion_gear_finder_desired_tier',
-    LOCATION: 'albion_gear_finder_location'
+    LOCATION: 'albion_gear_finder_location',
+    PRICE_THRESHOLD: 'albion_gear_finder_price_threshold'
 };
 
 // Item database organized by category
@@ -330,6 +331,30 @@ function generateItemId(baseItemId, tier, enchantment) {
     return itemId;
 }
 
+// Return an ordered list of effective tier keys that represent strictly higher power
+// levels than the desired tier, with duplicates (same equivalents array) removed.
+function getUniqueHigherTiers(desiredTier) {
+    const desiredValue = parseFloat(desiredTier);
+    const seen = new Set();
+    // Exclude the power level of the desired tier itself
+    seen.add(JSON.stringify(TIER_EQUIVALENTS[desiredTier]));
+
+    const keys = Object.keys(TIER_EQUIVALENTS)
+        .filter(k => parseFloat(k) > desiredValue)
+        .sort((a, b) => parseFloat(a) - parseFloat(b));
+
+    const uniqueHigherTiers = [];
+    for (const key of keys) {
+        const equivKey = JSON.stringify(TIER_EQUIVALENTS[key]);
+        if (!seen.has(equivKey)) {
+            seen.add(equivKey);
+            uniqueHigherTiers.push(key);
+        }
+    }
+
+    return uniqueHigherTiers;
+}
+
 // Fetch price data from Albion Online Data Project API
 async function fetchPriceData(itemIds, location) {
     const itemsParam = itemIds.join(',');
@@ -370,6 +395,16 @@ function formatPrice(price) {
     return price.toLocaleString('en-US');
 }
 
+// Escape HTML special characters to prevent XSS when inserting API values into innerHTML
+function escapeHtml(str) {
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
 // Format date
 function formatDate(dateString) {
     const date = new Date(dateString);
@@ -382,7 +417,7 @@ function formatDate(dateString) {
 }
 
 // Display results
-function displayResults(priceData, equivalents, baseItemId, desiredTier) {
+function displayResults(priceData, equivalents, baseItemId, desiredTier, higherTiers, threshold) {
     const resultsContent = document.getElementById('resultsContent');
     resultsContent.innerHTML = '';
     
@@ -454,17 +489,17 @@ function displayResults(priceData, equivalents, baseItemId, desiredTier) {
         
         card.innerHTML = `
             <div class="result-header">
-                <div class="result-title">Tier ${result.displayTier}</div>
+                <div class="result-title">Tier ${escapeHtml(result.displayTier)}</div>
                 <div class="result-price">${formatPrice(result.price)} 🪙</div>
             </div>
             <div class="result-details">
                 <div class="detail-item">
                     <div class="detail-label">Item ID:</div>
-                    <div class="detail-value">${result.itemId}</div>
+                    <div class="detail-value">${escapeHtml(result.itemId)}</div>
                 </div>
                 <div class="detail-item">
                     <div class="detail-label">Location:</div>
-                    <div class="detail-value">${result.location}</div>
+                    <div class="detail-value">${escapeHtml(result.location)}</div>
                 </div>
                 <div class="detail-item">
                     <div class="detail-label">Buy Price:</div>
@@ -472,7 +507,7 @@ function displayResults(priceData, equivalents, baseItemId, desiredTier) {
                 </div>
                 <div class="detail-item">
                     <div class="detail-label">Last Updated:</div>
-                    <div class="detail-value">${formatDate(result.lastUpdate)}</div>
+                    <div class="detail-value">${escapeHtml(formatDate(result.lastUpdate))}</div>
                 </div>
             </div>
         `;
@@ -511,6 +546,85 @@ function displayResults(priceData, equivalents, baseItemId, desiredTier) {
             `;
             
             resultsContent.appendChild(savingsInfo);
+        }
+    }
+
+    // Higher-tier options section
+    if (higherTiers && higherTiers.length > 0 && itemResults.length > 0 && threshold > 0) {
+        const cheapestSameTier = itemResults[0].price;
+        const maxPrice = cheapestSameTier * (1 + threshold / 100);
+        const higherTierResults = [];
+
+        for (const tierKey of higherTiers) {
+            let lowestPrice = Infinity;
+            let bestItem = null;
+
+            for (const [tier, enchantment] of TIER_EQUIVALENTS[tierKey]) {
+                const itemId = generateItemId(baseItemId, tier, enchantment);
+                const itemPrices = priceData.filter(p => p.item_id === itemId);
+
+                for (const priceInfo of itemPrices) {
+                    if (priceInfo.sell_price_min > 0 && priceInfo.sell_price_min < lowestPrice) {
+                        lowestPrice = priceInfo.sell_price_min;
+                        bestItem = {
+                            itemId,
+                            tier,
+                            enchantment,
+                            displayTier: enchantment > 0 ? `${tier}.${enchantment}` : `${tier}.0`,
+                            effectiveTier: tierKey,
+                            price: lowestPrice,
+                            location: priceInfo.city,
+                            lastUpdate: priceInfo.sell_price_min_date
+                        };
+                    }
+                }
+            }
+
+            if (bestItem && bestItem.price <= maxPrice) {
+                higherTierResults.push(bestItem);
+            }
+        }
+
+        if (higherTierResults.length > 0) {
+            const sectionHeader = document.createElement('div');
+            sectionHeader.className = 'higher-tier-section';
+            sectionHeader.innerHTML = `
+                <h3 class="higher-tier-header">⬆️ Higher Tier Options Within ${escapeHtml(String(threshold))}%</h3>
+                <p class="higher-tier-subtext">These items are more powerful than your selected tier and are priced within ${escapeHtml(String(threshold))}% of the cheapest same-tier option (${formatPrice(cheapestSameTier)} 🪙).</p>
+            `;
+            resultsContent.appendChild(sectionHeader);
+
+            for (const result of higherTierResults) {
+                const premiumPercent = ((result.price - cheapestSameTier) / cheapestSameTier * 100).toFixed(1);
+                const premiumLabel = result.price <= cheapestSameTier
+                    ? `${Math.abs(premiumPercent)}% cheaper`
+                    : `+${premiumPercent}% vs cheapest`;
+                const card = document.createElement('div');
+                card.className = 'result-card higher-tier';
+
+                card.innerHTML = `
+                    <div class="result-header">
+                        <div class="result-title">Tier ${escapeHtml(result.effectiveTier)} <span class="tier-badge">${escapeHtml(premiumLabel)}</span></div>
+                        <div class="result-price">${formatPrice(result.price)} 🪙</div>
+                    </div>
+                    <div class="result-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Item ID:</div>
+                            <div class="detail-value">${escapeHtml(result.itemId)}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Location:</div>
+                            <div class="detail-value">${escapeHtml(result.location)}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Last Updated:</div>
+                            <div class="detail-value">${escapeHtml(formatDate(result.lastUpdate))}</div>
+                        </div>
+                    </div>
+                `;
+
+                resultsContent.appendChild(card);
+            }
         }
     }
 }
@@ -597,6 +711,7 @@ async function findPrices() {
     const itemName = document.getElementById('itemSelect').value;
     const desiredTier = document.getElementById('desiredTier').value;
     const location = document.getElementById('location').value;
+    const threshold = Math.min(Math.max(parseFloat(document.getElementById('priceThreshold').value) || 0, 0), 100);
     
     if (!itemName) {
         // Show error message in results section instead of alert
@@ -633,18 +748,28 @@ async function findPrices() {
             throw new Error('Invalid tier selection');
         }
         
-        // Generate all item IDs to check
+        // Generate all item IDs to check for the desired tier
         const itemIds = equivalents.map(([tier, enchantment]) => 
             generateItemId(itemName, tier, enchantment)
         );
+
+        // Collect item IDs for higher tiers so they can be fetched in one request
+        const higherTiers = getUniqueHigherTiers(desiredTier);
+        const higherTierIdSet = new Set();
+        for (const tierKey of higherTiers) {
+            for (const [tier, enchantment] of TIER_EQUIVALENTS[tierKey]) {
+                higherTierIdSet.add(generateItemId(itemName, tier, enchantment));
+            }
+        }
+        const allItemIds = [...new Set([...itemIds, ...higherTierIdSet])];
         
-        console.log('Checking items:', itemIds);
+        console.log('Checking items:', allItemIds);
         
-        // Fetch price data
-        const priceData = await fetchPriceData(itemIds, location);
+        // Fetch price data for all items in a single request
+        const priceData = await fetchPriceData(allItemIds, location);
         
         // Display results
-        displayResults(priceData, equivalents, itemName, desiredTier);
+        displayResults(priceData, equivalents, itemName, desiredTier, higherTiers, threshold);
         
     } catch (error) {
         console.error('Error:', error);
@@ -676,6 +801,13 @@ function restoreSavedSelections() {
     const locationValue = urlParams.location || loadFromLocalStorage(STORAGE_KEYS.LOCATION);
     if (locationValue && location) {
         location.value = locationValue;
+    }
+    
+    // Restore price threshold
+    const thresholdValue = loadFromLocalStorage(STORAGE_KEYS.PRICE_THRESHOLD);
+    const priceThreshold = document.getElementById('priceThreshold');
+    if (thresholdValue !== null && priceThreshold) {
+        priceThreshold.value = thresholdValue;
     }
     
     // Restore desired tier (URL takes priority)
@@ -713,6 +845,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const itemSelect = document.getElementById('itemSelect');
     const desiredTier = document.getElementById('desiredTier');
     const location = document.getElementById('location');
+    const priceThreshold = document.getElementById('priceThreshold');
     
     // Handle category selection
     itemCategory.addEventListener('change', (e) => {
@@ -739,6 +872,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Handle location selection
     location.addEventListener('change', (e) => {
         saveToLocalStorage(STORAGE_KEYS.LOCATION, e.target.value);
+    });
+
+    // Handle price threshold input
+    priceThreshold.addEventListener('change', (e) => {
+        saveToLocalStorage(STORAGE_KEYS.PRICE_THRESHOLD, e.target.value);
     });
     
     // Handle find prices button

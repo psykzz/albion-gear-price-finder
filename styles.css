@@ -271,6 +271,47 @@ main {
     color: #666;
 }
 
+.result-card.higher-tier {
+    border-color: #7c4dff;
+    background: #f3f0ff;
+}
+
+.result-card.higher-tier::before {
+    content: "⬆ HIGHER TIER";
+    display: block;
+    color: #7c4dff;
+    font-weight: bold;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+.higher-tier-section {
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+.higher-tier-header {
+    color: #7c4dff;
+    font-size: 1.3em;
+    margin-bottom: 8px;
+}
+
+.higher-tier-subtext {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.tier-badge {
+    font-size: 0.75em;
+    background: #7c4dff;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-left: 8px;
+    font-weight: normal;
+}
+
 /* Loadout View Styles */
 .loadout-slot {
     background: white;
