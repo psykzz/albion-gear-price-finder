@@ -14,185 +14,278 @@ const STORAGE_KEYS = {
 
 // Item database organized by category
 const ITEM_DATABASE = {
+    // Helmets
     helmet: [
-        { name: 'Leather Hood', id: 'HEAD_LEATHER_SET1' },
-        { name: 'Mercenary Hood', id: 'HEAD_LEATHER_SET2' },
-        { name: 'Hunter Hood', id: 'HEAD_LEATHER_SET3' },
+        // Plate
         { name: 'Soldier Helmet', id: 'HEAD_PLATE_SET1' },
         { name: 'Knight Helmet', id: 'HEAD_PLATE_SET2' },
         { name: 'Guardian Helmet', id: 'HEAD_PLATE_SET3' },
-        { name: 'Cloth Cowl', id: 'HEAD_CLOTH_SET1' },
+        { name: 'Graveguard Helmet', id: 'HEAD_PLATE_UNDEAD' },
+        { name: 'Judicator Helmet', id: 'HEAD_PLATE_KEEPER' },
+        { name: 'Demon Helmet', id: 'HEAD_PLATE_HELL' },
+        { name: 'Duskweaver Helmet', id: 'HEAD_PLATE_FEY' },
+        { name: 'Helmet of Valor', id: 'HEAD_PLATE_AVALON' },
+        // Leather
+        { name: 'Mercenary Hood', id: 'HEAD_LEATHER_SET1' },
+        { name: 'Hunter Hood', id: 'HEAD_LEATHER_SET2' },
+        { name: 'Assassin Hood', id: 'HEAD_LEATHER_SET3' },
+        { name: 'Specter Hood', id: 'HEAD_LEATHER_UNDEAD' },
+        { name: 'Stalker Hood', id: 'HEAD_LEATHER_MORGANA' },
+        { name: 'Hellion Hood', id: 'HEAD_LEATHER_HELL' },
+        { name: 'Mistwalker Hood', id: 'HEAD_LEATHER_FEY' },
+        { name: 'Hood of Tenacity', id: 'HEAD_LEATHER_AVALON' },
+        // Cloth
+        { name: 'Scholar Cowl', id: 'HEAD_CLOTH_SET1' },
         { name: 'Cleric Cowl', id: 'HEAD_CLOTH_SET2' },
-        { name: 'Mage Cowl', id: 'HEAD_CLOTH_SET3' }
+        { name: 'Mage Cowl', id: 'HEAD_CLOTH_SET3' },
+        { name: 'Cultist Cowl', id: 'HEAD_CLOTH_MORGANA' },
+        { name: 'Druid Cowl', id: 'HEAD_CLOTH_KEEPER' },
+        { name: 'Fiend Cowl', id: 'HEAD_CLOTH_HELL' },
+        { name: 'Feyscale Hat', id: 'HEAD_CLOTH_FEY' },
+        { name: 'Cowl of Purity', id: 'HEAD_CLOTH_AVALON' }
     ],
+    // Armor
     armor: [
-        { name: 'Leather Jacket', id: 'ARMOR_LEATHER_SET1' },
-        { name: 'Mercenary Jacket', id: 'ARMOR_LEATHER_SET2' },
-        { name: 'Hunter Jacket', id: 'ARMOR_LEATHER_SET3' },
+        // Plate
         { name: 'Soldier Armor', id: 'ARMOR_PLATE_SET1' },
         { name: 'Knight Armor', id: 'ARMOR_PLATE_SET2' },
         { name: 'Guardian Armor', id: 'ARMOR_PLATE_SET3' },
-        { name: 'Cloth Robe', id: 'ARMOR_CLOTH_SET1' },
+        { name: 'Graveguard Armor', id: 'ARMOR_PLATE_UNDEAD' },
+        { name: 'Judicator Armor', id: 'ARMOR_PLATE_KEEPER' },
+        { name: 'Demon Armor', id: 'ARMOR_PLATE_HELL' },
+        { name: 'Duskweaver Armor', id: 'ARMOR_PLATE_FEY' },
+        { name: 'Armor of Valor', id: 'ARMOR_PLATE_AVALON' },
+        // Leather
+        { name: 'Mercenary Jacket', id: 'ARMOR_LEATHER_SET1' },
+        { name: 'Hunter Jacket', id: 'ARMOR_LEATHER_SET2' },
+        { name: 'Assassin Jacket', id: 'ARMOR_LEATHER_SET3' },
+        { name: 'Specter Jacket', id: 'ARMOR_LEATHER_UNDEAD' },
+        { name: 'Stalker Jacket', id: 'ARMOR_LEATHER_MORGANA' },
+        { name: 'Hellion Jacket', id: 'ARMOR_LEATHER_HELL' },
+        { name: 'Mistwalker Jacket', id: 'ARMOR_LEATHER_FEY' },
+        { name: 'Jacket of Tenacity', id: 'ARMOR_LEATHER_AVALON' },
+        // Cloth
+        { name: 'Scholar Robe', id: 'ARMOR_CLOTH_SET1' },
         { name: 'Cleric Robe', id: 'ARMOR_CLOTH_SET2' },
-        { name: 'Mage Robe', id: 'ARMOR_CLOTH_SET3' }
+        { name: 'Mage Robe', id: 'ARMOR_CLOTH_SET3' },
+        { name: 'Cultist Robe', id: 'ARMOR_CLOTH_MORGANA' },
+        { name: 'Druid Robe', id: 'ARMOR_CLOTH_KEEPER' },
+        { name: 'Fiend Robe', id: 'ARMOR_CLOTH_HELL' },
+        { name: 'Feyscale Robe', id: 'ARMOR_CLOTH_FEY' },
+        { name: 'Robe of Purity', id: 'ARMOR_CLOTH_AVALON' }
     ],
+    // Boots
     boots: [
-        { name: 'Leather Shoes', id: 'SHOES_LEATHER_SET1' },
-        { name: 'Mercenary Shoes', id: 'SHOES_LEATHER_SET2' },
-        { name: 'Hunter Shoes', id: 'SHOES_LEATHER_SET3' },
+        // Plate
         { name: 'Soldier Boots', id: 'SHOES_PLATE_SET1' },
         { name: 'Knight Boots', id: 'SHOES_PLATE_SET2' },
         { name: 'Guardian Boots', id: 'SHOES_PLATE_SET3' },
-        { name: 'Cloth Sandals', id: 'SHOES_CLOTH_SET1' },
+        { name: 'Graveguard Boots', id: 'SHOES_PLATE_UNDEAD' },
+        { name: 'Judicator Boots', id: 'SHOES_PLATE_KEEPER' },
+        { name: 'Demon Boots', id: 'SHOES_PLATE_HELL' },
+        { name: 'Duskweaver Boots', id: 'SHOES_PLATE_FEY' },
+        { name: 'Boots of Valor', id: 'SHOES_PLATE_AVALON' },
+        // Leather
+        { name: 'Mercenary Shoes', id: 'SHOES_LEATHER_SET1' },
+        { name: 'Hunter Shoes', id: 'SHOES_LEATHER_SET2' },
+        { name: 'Assassin Shoes', id: 'SHOES_LEATHER_SET3' },
+        { name: 'Specter Shoes', id: 'SHOES_LEATHER_UNDEAD' },
+        { name: 'Stalker Shoes', id: 'SHOES_LEATHER_MORGANA' },
+        { name: 'Hellion Shoes', id: 'SHOES_LEATHER_HELL' },
+        { name: 'Mistwalker Shoes', id: 'SHOES_LEATHER_FEY' },
+        { name: 'Shoes of Tenacity', id: 'SHOES_LEATHER_AVALON' },
+        // Cloth
+        { name: 'Scholar Sandals', id: 'SHOES_CLOTH_SET1' },
         { name: 'Cleric Sandals', id: 'SHOES_CLOTH_SET2' },
-        { name: 'Mage Sandals', id: 'SHOES_CLOTH_SET3' }
+        { name: 'Mage Sandals', id: 'SHOES_CLOTH_SET3' },
+        { name: 'Cultist Sandals', id: 'SHOES_CLOTH_MORGANA' },
+        { name: 'Druid Sandals', id: 'SHOES_CLOTH_KEEPER' },
+        { name: 'Fiend Sandals', id: 'SHOES_CLOTH_HELL' },
+        { name: 'Feyscale Sandals', id: 'SHOES_CLOTH_FEY' },
+        { name: 'Sandals of Purity', id: 'SHOES_CLOTH_AVALON' }
     ],
     // Swords
     'weapon-sword': [
         { name: 'Broadsword', id: 'MAIN_SWORD' },
-        { name: 'Claymore', id: 'MAIN_CLAYMORE' },
-        { name: 'Dual Swords', id: 'MAIN_DUALSWORD' },
-        { name: 'Carving Sword', id: 'MAIN_SCIMITAR_MORGANA' },
-        { name: 'Galatine Pair', id: 'MAIN_DUALSWORD_UNDEAD' },
-        { name: 'Clarent Blade', id: 'MAIN_CLAYMORE_AVALON' }
+        { name: 'Claymore', id: '2H_CLAYMORE' },
+        { name: 'Dual Swords', id: '2H_DUALSWORD' },
+        { name: 'Clarent Blade', id: 'MAIN_SCIMITAR_MORGANA' },
+        { name: 'Carving Sword', id: '2H_CLEAVER_HELL' },
+        { name: 'Galatine Pair', id: '2H_DUALSCIMITAR_UNDEAD' },
+        { name: 'Kingmaker', id: '2H_CLAYMORE_AVALON' }
     ],
     // Axes
     'weapon-axe': [
         { name: 'Battleaxe', id: 'MAIN_AXE' },
-        { name: 'Greataxe', id: 'MAIN_GREATAXE' },
-        { name: 'Halberd', id: 'MAIN_HALBERD' },
-        { name: 'Carrioncaller', id: 'MAIN_HALBERD_MORGANA' },
-        { name: 'Infernal Scythe', id: 'MAIN_SCYTHE_HELL' },
-        { name: 'Bear Paws', id: 'MAIN_AXE_KEEPER' }
+        { name: 'Greataxe', id: '2H_AXE' },
+        { name: 'Halberd', id: '2H_HALBERD' },
+        { name: 'Carrioncaller', id: '2H_HALBERD_MORGANA' },
+        { name: 'Infernal Scythe', id: '2H_SCYTHE_HELL' },
+        { name: 'Bear Paws', id: '2H_DUALAXE_KEEPER' },
+        { name: 'Realmbreaker', id: '2H_AXE_AVALON' }
     ],
     // Maces
     'weapon-mace': [
         { name: 'Mace', id: 'MAIN_MACE' },
-        { name: 'Heavy Mace', id: 'MAIN_HEAVYMACE' },
-        { name: 'Morning Star', id: 'MAIN_MORNINGSTAR' },
-        { name: 'Bedrock Mace', id: 'MAIN_MACE_KEEPER' },
+        { name: 'Heavy Mace', id: '2H_MACE' },
+        { name: 'Morning Star', id: '2H_FLAIL' },
+        { name: 'Bedrock Mace', id: 'MAIN_ROCKMACE_KEEPER' },
         { name: 'Incubus Mace', id: 'MAIN_MACE_HELL' },
-        { name: 'Camlann Mace', id: 'MAIN_MACE_AVALON' }
+        { name: 'Camlann Mace', id: '2H_MACE_MORGANA' },
+        { name: 'Oathkeepers', id: '2H_DUALMACE_AVALON' }
     ],
     // Hammers
     'weapon-hammer': [
         { name: 'Hammer', id: 'MAIN_HAMMER' },
-        { name: 'Polehammer', id: 'MAIN_POLEHAMMER' },
-        { name: 'Great Hammer', id: 'MAIN_GREATHAMMER' },
-        { name: 'Forge Hammers', id: 'MAIN_HAMMER_UNDEAD' },
-        { name: 'Grovekeeper', id: 'MAIN_HAMMER_KEEPER' },
-        { name: 'Hand of Justice', id: 'MAIN_HAMMER_AVALON' }
+        { name: 'Polehammer', id: '2H_POLEHAMMER' },
+        { name: 'Great Hammer', id: '2H_HAMMER' },
+        { name: 'Tombhammer', id: '2H_HAMMER_UNDEAD' },
+        { name: 'Forge Hammers', id: '2H_DUALHAMMER_HELL' },
+        { name: 'Grovekeeper', id: '2H_RAM_KEEPER' },
+        { name: 'Hand of Justice', id: '2H_HAMMER_AVALON' }
     ],
     // Crossbows
     'weapon-crossbow': [
-        { name: 'Crossbow', id: 'MAIN_CROSSBOW' },
-        { name: 'Heavy Crossbow', id: 'MAIN_CROSSBOWLARGE' },
-        { name: 'Light Crossbow', id: 'MAIN_CROSSBOW_CANNON' },
-        { name: 'Weeping Repeater', id: 'MAIN_CROSSBOW_UNDEAD' },
-        { name: 'Siegebow', id: 'MAIN_CROSSBOWLARGE_MORGANA' },
-        { name: 'Boltcasters', id: 'MAIN_CROSSBOW_AVALON' }
+        { name: 'Light Crossbow', id: 'MAIN_1HCROSSBOW' },
+        { name: 'Crossbow', id: '2H_CROSSBOW' },
+        { name: 'Heavy Crossbow', id: '2H_CROSSBOWLARGE' },
+        { name: 'Weeping Repeater', id: '2H_REPEATINGCROSSBOW_UNDEAD' },
+        { name: 'Siegebow', id: '2H_CROSSBOWLARGE_MORGANA' },
+        { name: 'Boltcasters', id: '2H_DUALCROSSBOW_HELL' },
+        { name: 'Energy Shaper', id: '2H_CROSSBOW_CANNON_AVALON' }
     ],
     // Bows
     'weapon-bow': [
-        { name: 'Bow', id: 'MAIN_BOW' },
-        { name: 'Warbow', id: 'MAIN_WARBOW' },
-        { name: 'Longbow', id: 'MAIN_LONGBOW' },
-        { name: 'Whispering Bow', id: 'MAIN_BOW_KEEPER' },
-        { name: 'Wailing Bow', id: 'MAIN_WARBOW_UNDEAD' },
-        { name: 'Bow of Badon', id: 'MAIN_LONGBOW_UNDEAD' }
+        { name: 'Bow', id: '2H_BOW' },
+        { name: 'Warbow', id: '2H_WARBOW' },
+        { name: 'Longbow', id: '2H_LONGBOW' },
+        { name: 'Whispering Bow', id: '2H_LONGBOW_UNDEAD' },
+        { name: 'Wailing Bow', id: '2H_BOW_HELL' },
+        { name: 'Bow of Badon', id: '2H_BOW_KEEPER' },
+        { name: 'Mistpiercer', id: '2H_BOW_AVALON' }
     ],
     // Spears
     'weapon-spear': [
         { name: 'Spear', id: 'MAIN_SPEAR' },
-        { name: 'Pike', id: 'MAIN_PIKE' },
-        { name: 'Glaive', id: 'MAIN_GLAIVE' },
-        { name: 'Trinity Spear', id: 'MAIN_SPEAR_KEEPER' },
-        { name: 'Spirithunter', id: 'MAIN_GLAIVE_HELL' },
-        { name: 'Daybreaker', id: 'MAIN_SPEAR_AVALON' }
+        { name: 'Pike', id: '2H_SPEAR' },
+        { name: 'Glaive', id: '2H_GLAIVE' },
+        { name: 'Heron Spear', id: 'MAIN_SPEAR_KEEPER' },
+        { name: 'Trinity Spear', id: '2H_TRIDENT_UNDEAD' },
+        { name: 'Spirithunter', id: '2H_HARPOON_HELL' },
+        { name: 'Daybreaker', id: 'MAIN_SPEAR_LANCE_AVALON' }
     ],
     // Quarterstaffs
     'weapon-quarterstaff': [
-        { name: 'Quarterstaff', id: 'MAIN_QUARTERSTAFF' },
-        { name: 'Iron-clad Staff', id: 'MAIN_IRONCLADEDSTAFF' },
-        { name: 'Double Bladed Staff', id: 'MAIN_DOUBLEBLADEDSTAFF' },
-        { name: 'Black Monk Stave', id: 'MAIN_QUARTERSTAFF_AVALON' },
-        { name: 'Soulscythe', id: 'MAIN_DOUBLEBLADEDSTAFF_HELL' },
-        { name: 'Staff of Balance', id: 'MAIN_IRONCLADEDSTAFF_HELL' }
+        { name: 'Quarterstaff', id: '2H_QUARTERSTAFF' },
+        { name: 'Iron-clad Staff', id: '2H_IRONCLADEDSTAFF' },
+        { name: 'Double Bladed Staff', id: '2H_DOUBLEBLADEDSTAFF' },
+        { name: 'Black Monk Stave', id: '2H_COMBATSTAFF_MORGANA' },
+        { name: 'Staff of Balance', id: '2H_ROCKSTAFF_KEEPER' },
+        { name: 'Soulscythe', id: '2H_TWINSCYTHE_HELL' },
+        { name: 'Grailseeker', id: '2H_QUARTERSTAFF_AVALON' }
     ],
     // Daggers
     'weapon-dagger': [
         { name: 'Dagger', id: 'MAIN_DAGGER' },
-        { name: 'Dagger Pair', id: 'MAIN_DAGGERPAIR' },
-        { name: 'Claws', id: 'MAIN_CLAWPAIR' },
-        { name: 'Bloodletter', id: 'MAIN_DAGGER_HELL' },
-        { name: 'Deathgivers', id: 'MAIN_DAGGERPAIR_UNDEAD' },
-        { name: 'Black Hands', id: 'MAIN_CLAWPAIR_MORGANA' }
+        { name: 'Dagger Pair', id: '2H_DAGGERPAIR' },
+        { name: 'Claws', id: '2H_CLAWPAIR' },
+        { name: 'Demonfang', id: 'MAIN_DAGGER_HELL' },
+        { name: 'Bloodletter', id: 'MAIN_RAPIER_MORGANA' },
+        { name: 'Deathgivers', id: '2H_DUALSICKLE_UNDEAD' },
+        { name: 'Black Hands', id: '2H_IRONGAUNTLETS_HELL' },
+        { name: 'Bridled Fury', id: '2H_DAGGER_KATAR_AVALON' }
+    ],
+    // Knuckles
+    'weapon-knuckles': [
+        { name: 'Brawler Gloves', id: '2H_KNUCKLES_SET1' },
+        { name: 'Battle Bracers', id: '2H_KNUCKLES_SET2' },
+        { name: 'Spiked Gauntlets', id: '2H_KNUCKLES_SET3' },
+        { name: 'Ursine Maulers', id: '2H_KNUCKLES_KEEPER' },
+        { name: 'Ravenstrike Cestus', id: '2H_KNUCKLES_MORGANA' },
+        { name: 'Hellfire Hands', id: '2H_KNUCKLES_HELL' },
+        { name: 'Fists of Avalon', id: '2H_KNUCKLES_AVALON' }
     ],
     // Fire Staffs
     'weapon-firestaff': [
         { name: 'Fire Staff', id: 'MAIN_FIRESTAFF' },
-        { name: 'Great Fire Staff', id: 'MAIN_FIRESTAFF_CRYSTAL' },
-        { name: 'Infernal Staff', id: 'MAIN_INFERNOSTAFF' },
+        { name: 'Great Fire Staff', id: '2H_FIRESTAFF' },
+        { name: 'Infernal Staff', id: '2H_INFERNOSTAFF' },
         { name: 'Wildfire Staff', id: 'MAIN_FIRESTAFF_KEEPER' },
-        { name: 'Brimstone Staff', id: 'MAIN_INFERNOSTAFF_MORGANA' },
-        { name: 'Blazing Staff', id: 'MAIN_FIRESTAFF_HELL' }
+        { name: 'Blazing Staff', id: '2H_INFERNOSTAFF_MORGANA' },
+        { name: 'Brimstone Staff', id: '2H_FIRESTAFF_HELL' },
+        { name: 'Dawnsong', id: '2H_FIRE_RINGPAIR_AVALON' }
     ],
     // Frost Staffs
     'weapon-froststaff': [
         { name: 'Frost Staff', id: 'MAIN_FROSTSTAFF' },
-        { name: 'Glacial Staff', id: 'MAIN_ICEGAUNTLETS' },
-        { name: 'Hoarfrost Staff', id: 'MAIN_ICECRYSTAL' },
-        { name: 'Chillhowl', id: 'MAIN_FROSTSTAFF_KEEPER' },
-        { name: 'Icicle Staff', id: 'MAIN_ICECRYSTAL_UNDEAD' },
-        { name: 'Permafrost Prism', id: 'MAIN_ICEGAUNTLETS_HELL' }
+        { name: 'Great Frost Staff', id: '2H_FROSTSTAFF' },
+        { name: 'Glacial Staff', id: '2H_GLACIALSTAFF' },
+        { name: 'Hoarfrost Staff', id: 'MAIN_FROSTSTAFF_KEEPER' },
+        { name: 'Chillhowl', id: 'MAIN_FROSTSTAFF_AVALON' },
+        { name: 'Icicle Staff', id: '2H_ICEGAUNTLETS_HELL' },
+        { name: 'Permafrost Prism', id: '2H_ICECRYSTAL_UNDEAD' }
     ],
     // Arcane Staffs
     'weapon-arcanestaff': [
         { name: 'Arcane Staff', id: 'MAIN_ARCANESTAFF' },
-        { name: 'Great Arcane Staff', id: 'MAIN_ARCANE_RINGPAIR' },
-        { name: 'Enigmatic Staff', id: 'MAIN_ENIGMATICSTAFF' },
-        { name: 'Witchwork Staff', id: 'MAIN_ARCANESTAFF_HELL' },
-        { name: 'Occult Staff', id: 'MAIN_ENIGMATICSTAFF_MORGANA' },
-        { name: 'Evensong', id: 'MAIN_ENIGMATICORB_MORGANA' }
+        { name: 'Great Arcane Staff', id: '2H_ARCANESTAFF' },
+        { name: 'Enigmatic Staff', id: '2H_ENIGMATICSTAFF' },
+        { name: 'Witchwork Staff', id: 'MAIN_ARCANESTAFF_UNDEAD' },
+        { name: 'Occult Staff', id: '2H_ARCANESTAFF_HELL' },
+        { name: 'Malevolent Locus', id: '2H_ENIGMATICORB_MORGANA' },
+        { name: 'Evensong', id: '2H_ARCANE_RINGPAIR_AVALON' }
     ],
     // Holy Staffs
     'weapon-holystaff': [
         { name: 'Holy Staff', id: 'MAIN_HOLYSTAFF' },
-        { name: 'Great Holy Staff', id: 'MAIN_HOLYSTAFF_CRYSTAL' },
-        { name: 'Divine Staff', id: 'MAIN_DIVINESTAFF' },
-        { name: 'Redemption Staff', id: 'MAIN_HOLYSTAFF_MORGANA' },
-        { name: 'Hallowfall', id: 'MAIN_HOLYSTAFF_HELL' },
-        { name: 'Lifetouch Staff', id: 'MAIN_HOLYSTAFF_UNDEAD' }
+        { name: 'Great Holy Staff', id: '2H_HOLYSTAFF' },
+        { name: 'Divine Staff', id: '2H_DIVINESTAFF' },
+        { name: 'Lifetouch Staff', id: 'MAIN_HOLYSTAFF_MORGANA' },
+        { name: 'Redemption Staff', id: '2H_HOLYSTAFF_UNDEAD' },
+        { name: 'Fallen Staff', id: '2H_HOLYSTAFF_HELL' },
+        { name: 'Hallowfall', id: 'MAIN_HOLYSTAFF_AVALON' }
     ],
     // Nature Staffs
     'weapon-naturestaff': [
         { name: 'Nature Staff', id: 'MAIN_NATURESTAFF' },
-        { name: 'Great Nature Staff', id: 'MAIN_NATURESTAFF_KEEPER' },
-        { name: 'Wild Staff', id: 'MAIN_WILDSTAFF' },
-        { name: 'Druidic Staff', id: 'MAIN_NATURESTAFF_AVALON' },
-        { name: 'Blight Staff', id: 'MAIN_WILDSTAFF_HELL' },
-        { name: 'Rampant Staff', id: 'MAIN_NATURESTAFF_HELL' }
+        { name: 'Great Nature Staff', id: '2H_NATURESTAFF' },
+        { name: 'Wild Staff', id: '2H_WILDSTAFF' },
+        { name: 'Druidic Staff', id: 'MAIN_NATURESTAFF_KEEPER' },
+        { name: 'Ironroot Staff', id: 'MAIN_NATURESTAFF_AVALON' },
+        { name: 'Blight Staff', id: '2H_NATURESTAFF_HELL' },
+        { name: 'Rampant Staff', id: '2H_NATURESTAFF_KEEPER' }
     ],
     // Cursed Staffs
     'weapon-cursedstaff': [
         { name: 'Cursed Staff', id: 'MAIN_CURSEDSTAFF' },
-        { name: 'Demonic Staff', id: 'MAIN_DEMONICSTAFF' },
-        { name: 'Great Cursed Staff', id: 'MAIN_CURSEDSTAFF_MORGANA' },
-        { name: 'Cursed Skull', id: 'MAIN_CURSEDSTAFF_UNDEAD' },
-        { name: 'Damnation Staff', id: 'MAIN_DEMONICSTAFF_HELL' },
+        { name: 'Great Cursed Staff', id: '2H_CURSEDSTAFF' },
+        { name: 'Demonic Staff', id: '2H_DEMONICSTAFF' },
+        { name: 'Lifecurse Staff', id: 'MAIN_CURSEDSTAFF_UNDEAD' },
+        { name: 'Cursed Skull', id: '2H_SKULLORB_HELL' },
+        { name: 'Damnation Staff', id: '2H_CURSEDSTAFF_MORGANA' },
         { name: 'Shadowcaller', id: 'MAIN_CURSEDSTAFF_AVALON' }
     ],
+    // Off-hand
     offhand: [
+        // Shields
         { name: 'Shield', id: 'OFF_SHIELD' },
-        { name: 'Sarcophagus', id: 'OFF_SARCOPHAGUS' },
-        { name: 'Tome of Insight', id: 'OFF_TOWERSHIELD_UNDEAD' },
-        { name: 'Book', id: 'OFF_BOOK' },
-        { name: 'Tome of Spells', id: 'OFF_ORB' },
-        { name: 'Eye of Secrets', id: 'OFF_DEMONSKULL' },
-        { name: 'Taproot', id: 'OFF_TOTEM' },
-        { name: 'Mistcaller', id: 'OFF_HORN' },
-        { name: 'Facebreaker', id: 'OFF_TALISMAN' },
-        { name: 'Torch', id: 'OFF_TORCH' }
+        { name: 'Sarcophagus', id: 'OFF_TOWERSHIELD_UNDEAD' },
+        { name: 'Facebreaker', id: 'OFF_SPIKEDSHIELD_MORGANA' },
+        { name: 'Caitiff Shield', id: 'OFF_SHIELD_HELL' },
+        { name: 'Astral Aegis', id: 'OFF_SHIELD_AVALON' },
+        // Books / Orbs
+        { name: 'Tome of Spells', id: 'OFF_BOOK' },
+        { name: 'Eye of Secrets', id: 'OFF_ORB_MORGANA' },
+        { name: 'Muisak', id: 'OFF_DEMONSKULL_HELL' },
+        // Totems / Horns
+        { name: 'Taproot', id: 'OFF_TOTEM_KEEPER' },
+        { name: 'Mistcaller', id: 'OFF_HORN_KEEPER' },
+        // Torches / Scepters
+        { name: 'Torch', id: 'OFF_TORCH' },
+        { name: 'Sacred Scepter', id: 'OFF_TALISMAN_AVALON' },
+        { name: 'Leering Cane', id: 'OFF_JESTERCANE_HELL' },
+        { name: 'Cryptcandle', id: 'OFF_LAMP_UNDEAD' },
+        { name: 'Celestial Censer', id: 'OFF_CENSER_AVALON' }
     ]
 };
 
